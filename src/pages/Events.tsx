@@ -1,6 +1,6 @@
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
-import { ThreeBackground } from "@/components/ThreeBackground";
+import pactBg from "/pact.png";
 import { Navbar } from "@/components/Navbar";
 import { EventsSection } from "@/components/EventsSection";
 import { EventCarousel } from "@/components/EventCarousel";
@@ -50,12 +50,19 @@ const Events = () => {
         ref={containerRef}
         className="relative min-h-screen bg-background text-foreground overflow-x-hidden"
       >
-        {/* Deep background layer */}
         <div className="fixed inset-0 z-0">
-          <ThreeBackground />
-          {/* Carnival Vignette Overlay */}
+          <div
+            style={{
+              position: "absolute",
+              inset: 0,
+              backgroundImage: `url(${pactBg})`,
+              backgroundSize: "cover",
+              backgroundPosition: "center",
+              backgroundRepeat: "no-repeat",
+              filter: "brightness(0.45)",
+            }}
+          />
           <div className="absolute inset-0 bg-gradient-to-b from-background/80 via-transparent to-background pointer-events-none" />
-          {/* Festive Glows */}
           <div className="absolute top-0 left-1/4 w-[500px] h-[500px] bg-red-500/10 blur-[120px] rounded-full animate-pulse pointer-events-none" />
           <div className="absolute bottom-0 right-1/4 w-[500px] h-[500px] bg-yellow-500/10 blur-[120px] rounded-full animate-pulse pointer-events-none" />
         </div>

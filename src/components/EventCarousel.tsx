@@ -66,7 +66,7 @@ const carouselEvents = [
 
 export function EventCarousel() {
   return (
-    <div className="w-full py-16 bg-[#1a1a1a] relative overflow-hidden min-h-[700px] flex items-center">
+    <div className="w-full pt-24 pb-10 bg-[#1a1a1a] relative overflow-visible min-h-[560px] flex items-center">
       {/* Ambient Background Glow */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-yellow-900/20 via-black to-black z-0 pointer-events-none" />
 
@@ -76,6 +76,8 @@ export function EventCarousel() {
         centeredSlides={true}
         slidesPerView={"auto"}
         loop={true}
+        initialSlide={Math.floor(carouselEvents.length / 2)}
+        spaceBetween={24}
         speed={800} // Smoother transition speed
         autoplay={{
           delay: 2500,
@@ -96,15 +98,15 @@ export function EventCarousel() {
         {carouselEvents.map((event) => (
           <SwiperSlide
             key={event.id}
-            className="w-[320px] md:w-[400px] h-[520px] relative group transition-all duration-300"
+            className="w-[260px] md:w-[320px] h-[420px] relative group transition-all duration-300"
           >
             {/* =======================
                 ROOF SECTION
             ======================== */}
-            <div className="absolute -top-[70px] left-1/2 -translate-x-1/2 w-[115%] z-30 perspective-1000">
+            <div className="absolute -top-[50px] left-1/2 -translate-x-1/2 w-[115%] z-30 perspective-1000">
               {/* Main Roof Slope */}
               <div
-                className="h-[80px] w-full relative rounded-t-lg shadow-2xl"
+                className="h-[60px] w-full relative rounded-t-lg shadow-2xl"
                 style={{
                   transform: "rotateX(10deg)",
                   background:
@@ -120,7 +122,7 @@ export function EventCarousel() {
               </div>
 
               {/* Roof Fascia (The edge with lights) */}
-              <div className="w-full h-10 bg-red-800 relative shadow-lg flex justify-around items-center px-2 z-40 rounded-sm border-b-4 border-red-900">
+              <div className="w-full h-8 bg-red-800 relative shadow-lg flex justify-around items-center px-2 z-40 rounded-sm border-b-4 border-red-900">
                 {/* Glowing Bulbs */}
                 {[...Array(9)].map((_, i) => (
                   <div
@@ -133,7 +135,7 @@ export function EventCarousel() {
 
               {/* Scalloped Fabric Edge */}
               <div
-                className="w-full h-5 relative -mt-1 z-30"
+                className="w-full h-4 relative -mt-1 z-30"
                 style={{
                   backgroundImage: `radial-gradient(circle at 18px 0, transparent 18px, #991b1b 19px)`,
                   backgroundSize: "36px 20px",
@@ -160,14 +162,14 @@ export function EventCarousel() {
             {/* =======================
                 MAIN BOOTH STRUCTURE
             ======================== */}
-            <div className="w-full h-full pt-6 relative">
+            <div className="w-full h-full pt-4 relative">
               {/* The Wooden Box Container */}
-              <div className="w-full h-full bg-[#2a1d15] rounded-lg relative overflow-hidden shadow-[0_30px_60px_-10px_rgba(0,0,0,0.8)] border-x-8 border-[#3f2e22]">
+              <div className="w-full h-full bg-[#2a1d15] rounded-lg relative overflow-hidden shadow-[0_30px_60px_-10px_rgba(0,0,0,0.8)] border-x-6 border-[#3f2e22]">
                 {/* Wood Grain Texture Overlay */}
                 <div className="absolute inset-0 opacity-20 pointer-events-none mix-blend-overlay bg-[url('https://www.transparenttextures.com/patterns/wood-pattern.png')]" />
 
                 {/* Event Image (The Back of the Booth) */}
-                <div className="absolute top-4 left-3 right-3 bottom-24 bg-black overflow-hidden rounded-t-md border border-white/5 shadow-inner">
+                <div className="absolute top-3 left-3 right-3 bottom-20 bg-black overflow-hidden rounded-t-md border border-white/5 shadow-inner">
                   <img
                     src={event.image}
                     alt={event.title}
@@ -182,7 +184,7 @@ export function EventCarousel() {
                 ======================== */}
                 <div className="absolute inset-0 flex flex-col justify-end">
                   {/* Text Info floating above counter */}
-                  <div className="px-6 pb-28 text-center z-20">
+                  <div className="px-5 pb-24 text-center z-20">
                     <h3 className="text-3xl font-bebas text-white mb-2 drop-shadow-md tracking-wide">
                       {event.title}
                     </h3>
@@ -197,7 +199,7 @@ export function EventCarousel() {
                   </div>
 
                   {/* The Wooden Counter (Bottom Ledge) */}
-                  <div className="h-24 bg-[#3f2e22] relative z-20 flex items-center justify-center border-t-4 border-[#5a4231] shadow-[0_-5px_15px_rgba(0,0,0,0.5)]">
+                  <div className="h-20 bg-[#3f2e22] relative z-20 flex items-center justify-center border-t-4 border-[#5a4231] shadow-[0_-5px_15px_rgba(0,0,0,0.5)]">
                     {/* Wood Detail Lines */}
                     <div className="absolute top-2 w-full h-[1px] bg-white/10" />
                     <div className="absolute bottom-2 w-full h-[1px] bg-black/30" />
@@ -205,7 +207,7 @@ export function EventCarousel() {
                     {/* Ticket Button sitting on the counter */}
                     <Link
                       to="/register"
-                      className="relative group/btn flex items-center gap-3 bg-[#f59e0b] hover:bg-[#fbbf24] text-amber-950 px-6 py-3 font-bold uppercase tracking-wider rounded-sm transition-all transform hover:-translate-y-1 shadow-[0_5px_0_#b45309] active:translate-y-0 active:shadow-none"
+                      className="relative group/btn flex items-center gap-3 bg-[#f59e0b] hover:bg-[#fbbf24] text-amber-950 px-5 py-2.5 font-bold uppercase tracking-wider rounded-sm transition-all transform hover:-translate-y-1 shadow-[0_5px_0_#b45309] active:translate-y-0 active:shadow-none"
                       style={{
                         clipPath:
                           "polygon(10px 0, 100% 0, 100% 100%, 10px 100%, 0 50%)", // Ticket shape
