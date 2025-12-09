@@ -17,7 +17,8 @@ const Home = () => {
     <>
       <Helmet>
         <title>
-          IEMPACT 2026 - College Cultural Fest | Where Tradition Meets Innovation
+          IEMPACT 2026 - College Cultural Fest | Where Tradition Meets
+          Innovation
         </title>
         <meta
           name="description"
@@ -27,7 +28,6 @@ const Home = () => {
 
       {/* ✅ ROOT WRAPPER — LIGHT, NO OVERLAY */}
       <div className="relative w-full overflow-x-hidden">
-
         {/* ✅ BACKGROUND IMAGE — AS IS (NO DARKENING) */}
         <div
           style={{
@@ -38,6 +38,7 @@ const Home = () => {
             backgroundSize: "cover",
             backgroundPosition: "center",
             backgroundRepeat: "no-repeat",
+            filter: "brightness(0.5)",
           }}
         />
 

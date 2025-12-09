@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, Ticket, ArrowRight } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
+import fairyLights from "/Fairy-lights-small.svg";
 
 const navLinks = [
   { name: "Home", href: "/" },
@@ -30,9 +31,9 @@ export function Navbar() {
       initial={{ y: -80, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.6, ease: "easeOut" }}
-      className="fixed top-4 left-0 right-0 z-50"
+      className="absolute top-4 left-0 right-0 z-50"
     >
-      <div className="flex justify-center px-4">
+      <div className="flex flex-col items-center justify-center px-4">
         {/* ================= NAV PILL ================= */}
         <div
           className={`
@@ -50,12 +51,13 @@ export function Navbar() {
           {/* ================= LOGO ================= */}
           <Link to="/" className="flex items-center gap-2">
             <span className="font-bebas text-3xl text-white tracking-wide">
-              <source srcSet="/logo.svg" type="image/svg+xml" />
+              IEMPACT
             </span>
+            <span className="font-bebas text-3xl text-yellow-400">2026</span>
           </Link>
 
           {/* ================= DESKTOP ROUTES ================= */}
-          <div className="hidden lg:flex items-center gap-10">
+          <div className="hidden lg:flex items-center gap-20">
             {navLinks.map((link) => (
               <Link
                 key={link.name}
@@ -132,6 +134,13 @@ export function Navbar() {
           >
             {isMobileMenuOpen ? <X size={22} /> : <Menu size={22} />}
           </button>
+        </div>
+        <div className="w-[95%] px-6 max-w-7xl h-[8vh] pointer-events-none">
+          <img
+            src={fairyLights}
+            alt="Fairy Lights"
+            className="object-contain"
+          />
         </div>
       </div>
 
