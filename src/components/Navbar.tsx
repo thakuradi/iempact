@@ -50,10 +50,11 @@ export function Navbar() {
         >
           {/* ================= LOGO ================= */}
           <Link to="/" className="flex items-center gap-2">
-            <span className="font-bebas text-3xl text-white tracking-wide">
-              IEMPACT
-            </span>
-            <span className="font-bebas text-3xl text-yellow-400">2026</span>
+            <img
+              src="/pactlogo.png"
+              alt="PACT logo"
+              className="h-14 md:h-15 w-auto object-contain brightness-110 contrast-125"
+            />
           </Link>
 
           {/* ================= DESKTOP ROUTES ================= */}
