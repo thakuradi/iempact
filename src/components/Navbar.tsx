@@ -96,7 +96,7 @@ export function Navbar() {
           {/* ================= CTA ================= */}
           <div className="hidden lg:block">
             <Link
-              to="/register"
+              to="/auth"
               className="
                 relative group
                 flex items-center gap-3
@@ -178,7 +178,7 @@ export function Navbar() {
               ))}
 
               <Link
-                to="/register"
+                to="/auth"
                 className="
                   mt-2
                   inline-flex justify-center items-center gap-3

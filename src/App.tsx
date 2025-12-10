@@ -11,6 +11,7 @@ import Schedule from "./pages/Schedule";
 import Contact from "./pages/Contact";
 import Register from "./pages/Register";
 import NotFound from "./pages/NotFound";
+import AuthPage from "./pages/auth";
 
 const queryClient = new QueryClient();
 
@@ -27,6 +28,7 @@ const App = () => (
             <Route path="/events" element={<Events />} />
             <Route path="/schedule" element={<Schedule />} />
             <Route path="/contact" element={<Contact />} />
+            <Route path="/auth" element={<AuthPage />} />
             <Route path="/register" element={<Register />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
