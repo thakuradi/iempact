@@ -20,7 +20,7 @@ export default function ComingSoon() {
           IEMPACT 2026
         </h1>
 
-        <p className="text-yellow-300 font-semibold tracking-widest text-sm mb-4">
+        <p className="text-yellow-300 font-['Rye'] font-semibold tracking-widest text-sm mb-4">
           THE GRAND CARNIVAL RETURNS
         </p>
 

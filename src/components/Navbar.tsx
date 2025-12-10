@@ -33,6 +33,7 @@ export function Navbar() {
       transition={{ duration: 0.6, ease: "easeOut" }}
       className="absolute top-4 left-0 right-0 z-50"
     >
+      
       <div className="flex flex-col items-center justify-center px-4">
         {/* ================= NAV PILL ================= */}
         <div
@@ -49,12 +50,16 @@ export function Navbar() {
           `}
         >
           {/* ================= LOGO ================= */}
-          <Link to="/" className="flex items-center gap-2">
+          
+          <Link to="/">
+          <div className="h-14 md:h-15 overflow-hidden w-24 rounded-[3rem]">
             <img
               src="/pactlogo.png"
               alt="PACT logo"
-              className="h-14 md:h-15 w-auto object-contain brightness-110 contrast-125"
+              className="h-14 md:h-15 w-full 
+              object-cover brightness-110 contrast-125"
             />
+            </div>
           </Link>
 
           {/* ================= DESKTOP ROUTES ================= */}
@@ -65,8 +70,8 @@ export function Navbar() {
                 to={link.href}
                 className={`
                   relative
-                  font-['Playfair_Display']
-                  text-[1.1rem]
+                  font-['Rye']
+                  text-[1.2rem]
                   tracking-tight
                   transition-colors
                   ${
@@ -104,6 +109,7 @@ export function Navbar() {
                 text-amber-950
                 px-6 py-3
                 font-black text-sm
+                font-['Rye']
                 uppercase tracking-wider
                 border-2 border-amber-700
                 transition-all transform
@@ -168,7 +174,7 @@ export function Navbar() {
                   key={link.name}
                   to={link.href}
                   className="
-                    font-['Playfair_Display']
+                    font-['Rye']
                     text-[1.15rem]
                     text-white/85 hover:text-yellow-400
                   "
@@ -186,6 +192,7 @@ export function Navbar() {
                   text-amber-950
                   px-6 py-3
                   font-black text-sm
+                  font-['Rye']
                   uppercase tracking-wider
                   border-2 border-amber-700
                   shadow-[0_5px_0_#b45309]
