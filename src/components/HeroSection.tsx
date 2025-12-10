@@ -36,7 +36,7 @@ export function HeroSection() {
     <section className="relative min-h-screen flex items-center justify-center pb-8">
       <div className="container mx-auto px-4 text-center">
 
-        {/* ================= MAIN TITLE ================= */}
+        {/* ================= MAIN TITLE (SAMARKAN ONLY) ================= */}
         <AnimatePresence mode="wait">
           <motion.div
             key={TITLES[index]}
@@ -92,24 +92,23 @@ export function HeroSection() {
           </motion.div>
         </AnimatePresence>
 
-        {/* ================= SUBHEADING ================= */}
+        {/* ================= SUBHEADING (RYE) ================= */}
         <p
           className="
             mx-auto mt-1
             text-[1.25rem] sm:text-[1.35rem] md:text-[1.45rem]
-            font-bold
+            font-['Rye']
             tracking-tight
             leading-none
             text-white/90
-            font-['Playfair_Display']
             whitespace-nowrap
           "
         >
           An escape from the clockwork of days into the living rhythm of the Mela.
         </p>
 
-        {/* ================= DATE + VENUE ================= */}
-        <div className="flex flex-wrap justify-center gap-4 mt-4 mb-12 md:mb-16">
+        {/* ================= DATE + VENUE (RYE) ================= */}
+        <div className="flex flex-wrap justify-center gap-4 mt-4 mb-12 md:mb-16 font-['Rye']">
           <div className="px-6 py-2.5 rounded-full bg-yellow-300 text-black text-sm flex items-center gap-2 shadow-md border-2 border-yellow-600/60">
             <Calendar className="w-4 h-4" />
             January 17–18, 2026
@@ -121,8 +120,8 @@ export function HeroSection() {
           </div>
         </div>
 
-        {/* ================= CTA BUTTONS ================= */}
-        <div className="flex flex-col sm:flex-row justify-center gap-6">
+        {/* ================= CTA BUTTONS (RYE) ================= */}
+        <div className="flex flex-col sm:flex-row justify-center gap-6 font-['Rye']">
           <Link
             to="/register"
             className="
