@@ -6,11 +6,10 @@ import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { Helmet } from "react-helmet-async";
-import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
-import { CheckCircle, Loader2 } from "lucide-react";
+import { CheckCircle, Loader2, Plus, Trash2, Users, User } from "lucide-react";
 import { z } from "zod";
-import fareStripes from "/fare-tent.svg";
+
 const events = [
   "Battle of Bands",
   "Classical Dance",
@@ -24,50 +23,53 @@ const events = [
   "Quiz Championship",
 ];
 
-const registrationSchema = z.object({
-  full_name: z
+// Shared schema parts
+const fileSchema = z
+  .instanceof(File, { message: "Payment screenshot is required" })
+  .refine((file) => file.size <= 5000000, `Max file size is 5MB.`)
+  .refine(
+    (file) => ["image/jpeg", "image/png", "image/webp"].includes(file.type),
+    "Only .jpg, .png, .webp formats are supported."
+  );
+
+// Solo Schema
+const soloSchema = z.object({
+  registrationType: z.literal("solo"),
+  fullName: z
     .string()
     .trim()
     .min(2, "Name must be at least 2 characters")
     .max(100, "Name must be less than 100 characters"),
-  email: z
-    .string()
-    .trim()
-    .email("Invalid email address")
-    .max(255, "Email must be less than 255 characters"),
-  phone: z
-    .string()
-    .trim()
-    .min(10, "Phone number must be at least 10 digits")
-    .max(15, "Phone number must be less than 15 digits")
-    .regex(/^[0-9+\-\s]+$/, "Invalid phone number format"),
-  college_name: z
-    .string()
-    .trim()
-    .min(2, "College name must be at least 2 characters")
-    .max(200, "College name must be less than 200 characters"),
-  event_name: z.string().min(1, "Please select an event"),
-  team_name: z
+  eventName: z.string().min(1, "Please select an event"),
+  transactionUid: z.string().trim().min(1, "Transaction ID is required"),
+  paymentScreenshot: fileSchema,
+});
+
+// Team Schema
+const teamSchema = z.object({
+  registrationType: z.literal("team"),
+  teamName: z
     .string()
     .trim()
     .min(1, "Team name is required")
     .max(100, "Team name must be less than 100 characters"),
-  team_size: z
-    .number()
-    .min(1, "Team size must be at least 1")
-    .max(10, "Team size cannot exceed 10"),
-  transaction_uid: z
+  teamLeader: z
     .string()
     .trim()
-    .min(1, "Transaction ID is required"),
-  payment_screenshot: z
-    .instanceof(File, { message: "Payment screenshot is required" })
-    .refine((file) => file.size <= 5000000, `Max file size is 5MB.`)
-    .refine(
-      (file) => ["image/jpeg", "image/png", "image/webp"].includes(file.type),
-      "Only .jpg, .png, .webp formats are supported."
-    ),
+    .min(2, "Leader name is required"),
+  teamMembers: z
+    .array(z.string().trim().min(1, "Member name cannot be empty"))
+    .min(1, "At least one team member is required"),
+  eventName: z.string().min(1, "Please select an event"),
+  transactionUid: z.string().trim().min(1, "Transaction ID is required"),
+  paymentScreenshot: fileSchema,
 });
+
+// Discriminated Union
+const registrationSchema = z.discriminatedUnion("registrationType", [
+  soloSchema,
+  teamSchema,
+]);
 
 type RegistrationForm = z.infer<typeof registrationSchema>;
 
@@ -76,21 +78,22 @@ const Register = () => {
   const [searchParams] = useSearchParams();
   const preselectedEvent = searchParams.get("event") || "";
 
-  const [formData, setFormData] = useState<RegistrationForm>({
-    full_name: "",
-    email: "",
-    phone: "",
-    college_name: "",
-    event_name: preselectedEvent,
-    team_name: "",
-    team_size: 1,
-    transaction_uid: "",
-    payment_screenshot: undefined as unknown as File,
+  // Helper to get initial state based on type
+  const [registrationType, setRegistrationType] = useState<"solo" | "team">("solo");
+  
+  // State for form fields
+  // We keep a superset of state for UI, but validate only relevant parts
+  const [formData, setFormData] = useState({
+    fullName: "",
+    teamName: "",
+    teamLeader: "",
+    teamMembers: [""] as string[],
+    eventName: preselectedEvent,
+    transactionUid: "",
+    paymentScreenshot: undefined as unknown as File,
   });
 
-  const [errors, setErrors] = useState<
-    Partial<Record<keyof RegistrationForm, string>>
-  >({});
+  const [errors, setErrors] = useState<Record<string, string>>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
 
@@ -98,54 +101,103 @@ const Register = () => {
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
   ) => {
     const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+    if (errors[name]) {
+      setErrors((prev) => {
+        const newErrors = { ...prev };
+        delete newErrors[name];
+        return newErrors;
+      });
+    }
+  };
+
+  const handleMemberChange = (index: number, value: string) => {
+    const updatedMembers = [...formData.teamMembers];
+    updatedMembers[index] = value;
+    setFormData((prev) => ({ ...prev, teamMembers: updatedMembers }));
+    
+    // Clear error for specific member index if simple error string logic is used, 
+    // or just clear the general 'teamMembers' error
+    if (errors.teamMembers) {
+       setErrors((prev) => {
+        const newErrors = { ...prev };
+        delete newErrors.teamMembers;
+        return newErrors;
+       })
+    }
+  };
+
+  const addMember = () => {
     setFormData((prev) => ({
       ...prev,
-      [name]: name === "team_size" ? parseInt(value) || 1 : value,
+      teamMembers: [...prev.teamMembers, ""],
     }));
-    // Clear error when user starts typing
-    if (errors[name as keyof RegistrationForm]) {
-      setErrors((prev) => ({ ...prev, [name]: undefined }));
-    }
+  };
+
+  const removeMember = (index: number) => {
+    const updatedMembers = formData.teamMembers.filter((_, i) => i !== index);
+    setFormData((prev) => ({ ...prev, teamMembers: updatedMembers }));
   };
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files[0]) {
-      const file = e.target.files[0];
-      setFormData((prev) => ({ ...prev, payment_screenshot: file }));
-      if (errors.payment_screenshot) {
-        setErrors((prev) => ({ ...prev, payment_screenshot: undefined }));
+      setFormData((prev) => ({ ...prev, paymentScreenshot: e.target.files![0] }));
+      if (errors.paymentScreenshot) {
+         setErrors((prev) => {
+            const newErrors = { ...prev };
+            delete newErrors.paymentScreenshot;
+            return newErrors;
+        });
       }
     }
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log("Form submitted. Validating...");
     setIsSubmitting(true);
     setErrors({});
 
-    // Validate form data
-    const result = registrationSchema.safeParse(formData);
+    // Construct object for Zod validation
+    let validationPayload: any = {
+      registrationType,
+      eventName: formData.eventName,
+      transactionUid: formData.transactionUid,
+      paymentScreenshot: formData.paymentScreenshot,
+    };
+
+    if (registrationType === "solo") {
+      validationPayload = {
+        ...validationPayload,
+        fullName: formData.fullName,
+      };
+    } else {
+      validationPayload = {
+        ...validationPayload,
+        teamName: formData.teamName,
+        teamLeader: formData.teamLeader,
+        teamMembers: formData.teamMembers,
+      };
+    }
+
+    const result = registrationSchema.safeParse(validationPayload);
+
     if (!result.success) {
       console.log("Validation failed:", result.error.errors);
-      const fieldErrors: Partial<Record<keyof RegistrationForm, string>> = {};
+      const fieldErrors: Record<string, string> = {};
       result.error.errors.forEach((err) => {
-        const field = err.path[0] as keyof RegistrationForm;
-        fieldErrors[field] = err.message;
+        // Handle array errors for team members specially if needed
+        const path = err.path.join(".");
+        fieldErrors[path] = err.message;
       });
       setErrors(fieldErrors);
       
-      // Show error in popup as requested
       const firstError = Object.values(fieldErrors)[0];
       toast.error("Form Validation Failed", {
-        description: firstError || "Please check the form for errors.",
+        description: firstError || "Please check all fields.",
       });
-
       setIsSubmitting(false);
       return;
     }
-
-    console.log("Validation passed. Checking token...");
 
     try {
       const token = localStorage.getItem("token");
@@ -154,42 +206,42 @@ const Register = () => {
       }
 
       const submitData = new FormData();
-      submitData.append("teamName", formData.team_name);
-      submitData.append("teamNumber", formData.phone); // Mapping phone to teamNumber as per API understanding
-      submitData.append("transactionUid", formData.transaction_uid);
-      submitData.append("eventName", formData.event_name);
-      submitData.append("paymentScreenshot", formData.payment_screenshot);
-      // Adding extra fields just in case backend needs them or allows them
-      submitData.append("fullName", formData.full_name);
-      submitData.append("email", formData.email);
-      submitData.append("collegeName", formData.college_name);
-      submitData.append("teamSize", formData.team_size.toString());
+      submitData.append("registrationType", registrationType);
+      submitData.append("eventName", formData.eventName);
+      submitData.append("transactionUid", formData.transactionUid);
+      submitData.append("paymentScreenshot", formData.paymentScreenshot);
 
-      console.log("Submitting to backend:", `${import.meta.env.VITE_LOCAL_BACKENDURL}/registration`);
+      if (registrationType === "solo") {
+        submitData.append("fullName", formData.fullName);
+      } else {
+        submitData.append("teamName", formData.teamName);
+        submitData.append("teamLeader", formData.teamLeader);
+        submitData.append("teamMembers", JSON.stringify(formData.teamMembers));
+      }
+
+      console.log("Submitting:", Object.fromEntries(submitData.entries()));
+      
       const response = await axios.post(
         `${import.meta.env.VITE_LOCAL_BACKENDURL}/registration`,
         submitData,
         {
           headers: {
             Authorization: `Bearer ${token}`,
-            // "Content-Type": "multipart/form-data", // Let axios set this with boundary
+            "Content-Type": "multipart/form-data",
           },
         }
       );
-      console.log("Backend response:", response.data);
 
       if (response.data.success) {
         setIsSuccess(true);
-        toast.success("Registration successful! See you at IMPACT 2026!");
-      } else {
-        throw new Error(response.data.message || "Registration failed");
+        toast.success("Registration successful!");
       }
     } catch (error: any) {
       console.error("Registration Error:", error);
       const errorMessage =
         error.response?.data?.message ||
         error.message ||
-        "Registration failed. Please try again.";
+        "Registration failed.";
       toast.error(errorMessage);
     } finally {
       setIsSubmitting(false);
@@ -198,352 +250,226 @@ const Register = () => {
 
   if (isSuccess) {
     return (
-      <>
-        <Helmet>
-          <title>Registration Successful | IMPACT 2026</title>
-        </Helmet>
-        <div
-          className="relative min-h-screen 
-        bg-background text-foreground"
-        >
-          <Navbar />
-          <main
-            className="pt-20 min-h-[80vh] flex 
-          items-center justify-center"
-          >
+      <div className="min-h-screen bg-background text-foreground flex flex-col">
+        <Navbar />
+        <main className="flex-grow flex items-center justify-center p-4 pt-20">
             <motion.div
               initial={{ scale: 0.8, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
-              className="text-center p-8 max-w-md mx-auto"
+              className="text-center p-8 max-w-md w-full bg-card/30 backdrop-blur-sm rounded-2xl border border-border/30"
             >
-              <div className="w-20 h-20 rounded-full bg-accent/20 flex items-center justify-center mx-auto mb-6">
-                <CheckCircle className="w-10 h-10 text-accent" />
+              <div className="w-20 h-20 rounded-full bg-green-500/20 flex items-center justify-center mx-auto mb-6">
+                <CheckCircle className="w-10 h-10 text-green-500" />
               </div>
-              <h1 className="font-bebas text-4xl md:text-5xl mb-4">
-                <span className="text-gradient-accent">Registration</span>{" "}
-                Complete!
-              </h1>
-              <p className="font-poppins text-foreground/70 mb-8">
-                Thanks for your registration. We will shortly verify your payment and send you an email.
+              <h1 className="font-bebas text-4xl mb-2">Registration Complete!</h1>
+              <p className="text-foreground/70 mb-8 font-poppins">
+                Your {registrationType} registration has been received.
               </p>
-              <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <Button variant="hero" onClick={() => navigate("/events")}>
-                  Explore More Events
+              <div className="flex gap-4 justify-center">
+                 <Button variant="hero" onClick={() => navigate("/events")}>
+                  More Events
                 </Button>
-                <Button
-                  variant="outline"
-                  onClick={() => {
-
-                    setIsSuccess(false);
-                    setFormData({
-                      full_name: "",
-                      email: "",
-                      phone: "",
-                      college_name: "",
-                      event_name: "",
-                      team_name: "",
-                      team_size: 1,
-                      transaction_uid: "",
-                      payment_screenshot: undefined as unknown as File,
-                    });
-                  }}
-                >
+                <Button variant="outline" onClick={() => setIsSuccess(false)}>
                   Register Another
                 </Button>
               </div>
             </motion.div>
-          </main>
-          <Footer />
-        </div>
-      </>
+        </main>
+        <Footer />
+      </div>
     );
   }
 
   return (
     <>
       <Helmet>
-        <title>Register | IMPACT 2026 College Cultural Fest</title>
-        <meta
-          name="description"
-          content="Register for IMPACT 2026 events. Join thousands of participants from 100+ colleges in the largest cultural fest."
-        />
+        <title>Register | IMPACT 2026</title>
       </Helmet>
-
       <div className="relative min-h-screen bg-background text-foreground">
         <Navbar />
-        <main className="pt-20 pb-16">
-          <div className="container mx-auto px-4 py-12">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              className="max-w-2xl mx-auto"
-            >
-              {/* Header */}
-              <div className="text-center mb-10">
-                <h1 className="font-bebas text-5xl md:text-7xl mb-4">
-                  <span className="text-gradient-accent">Register</span> Now
-                </h1>
-                <p className="font-poppins text-foreground/70 text-lg">
-                  Secure your spot at IMPACT 2026. Fill in your details below.
-                </p>
+        <main className="pt-24 pb-16 container mx-auto px-4">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="max-w-2xl mx-auto"
+          >
+            <div className="text-center mb-10">
+              <h1 className="font-bebas text-5xl md:text-7xl mb-4">
+                <span className="text-gradient-accent">Register</span> Now
+              </h1>
+              <p className="text-foreground/70 font-poppins">
+                Join the largest cultural fest.
+              </p>
+            </div>
+
+            <div className="bg-card/30 backdrop-blur-sm border border-border/30 rounded-2xl p-6 md:p-8">
+              {/* Type Selection Tabs */}
+              <div className="flex p-1 bg-black/20 rounded-xl mb-8">
+                <button
+                  onClick={() => setRegistrationType("solo")}
+                  className={`flex-1 flex items-center justify-center gap-2 py-3 rounded-lg text-sm font-medium transition-all ${
+                    registrationType === "solo"
+                      ? "bg-accent text-accent-foreground shadow-lg"
+                      : "text-foreground/60 hover:text-foreground hover:bg-white/5"
+                  }`}
+                >
+                  <User className="w-4 h-4" />
+                  Individual
+                </button>
+                <button
+                  onClick={() => setRegistrationType("team")}
+                  className={`flex-1 flex items-center justify-center gap-2 py-3 rounded-lg text-sm font-medium transition-all ${
+                    registrationType === "team"
+                      ? "bg-accent text-accent-foreground shadow-lg"
+                      : "text-foreground/60 hover:text-foreground hover:bg-white/5"
+                  }`}
+                >
+                  <Users className="w-4 h-4" />
+                  Team
+                </button>
               </div>
 
-              {/* Registration Form */}
-              <form
-                onSubmit={handleSubmit}
-                className="p-6 md:p-8 rounded-2xl bg-card/30 backdrop-blur-sm border border-border/30"
-              >
-                <div className="space-y-6">
-                  {/* Event Selection */}
-                  <div>
-                    <label className="block font-poppins text-sm font-medium text-foreground/80 mb-2">
-                      Select Event <span className="text-primary">*</span>
-                    </label>
+              <form onSubmit={handleSubmit} className="space-y-6">
+                
+                {/* Event Selection */}
+                <div className="space-y-2">
+                    <label className="text-sm font-medium pl-1">Event</label>
                     <select
-                      name="event_name"
-                      value={formData.event_name}
+                      name="eventName"
+                      value={formData.eventName}
                       onChange={handleChange}
-                      className={`w-full px-4 py-3 rounded-lg bg-black text-white border font-poppins text-sm focus:border-accent focus:outline-none transition-colors ${
-                        errors.event_name
-                          ? "border-primary"
-                          : "border-border/50"
-                      }`}
+                      className="w-full px-4 py-3 rounded-lg bg-black/40 border border-border/50 focus:border-accent outline-none text-white"
                     >
-                      <option value="" className="bg-black text-white">Choose an event...</option>
-                      {events.map((event) => (
-                        <option key={event} value={event} className="bg-black text-white">
-                          {event}
-                        </option>
+                      <option value="">Select Event...</option>
+                      {events.map((e) => (
+                        <option key={e} value={e} className="bg-black">{e}</option>
                       ))}
                     </select>
-                    {errors.event_name && (
-                      <p className="mt-1 text-sm text-primary">
-                        {errors.event_name}
-                      </p>
-                    )}
-                  </div>
-
-                  {/* Personal Details */}
-                  <div className="grid md:grid-cols-2 gap-4">
-                    <div>
-                      <label className="block font-poppins text-sm font-medium text-foreground/80 mb-2">
-                        Full Name <span className="text-primary">*</span>
-                      </label>
-                      <input
-                        type="text"
-                        name="full_name"
-                        value={formData.full_name}
-                        onChange={handleChange}
-                        placeholder="Enter your full name"
-                        className={`w-full px-4 py-3 rounded-lg bg-input border font-poppins text-sm placeholder:text-foreground/40 focus:border-accent focus:outline-none transition-colors ${
-                          errors.full_name
-                            ? "border-primary"
-                            : "border-border/50"
-                        }`}
-                      />
-                      {errors.full_name && (
-                        <p className="mt-1 text-sm text-primary">
-                          {errors.full_name}
-                        </p>
-                      )}
-                    </div>
-                    <div>
-                      <label className="block font-poppins text-sm font-medium text-foreground/80 mb-2">
-                        Email Address <span className="text-primary">*</span>
-                      </label>
-                      <input
-                        type="email"
-                        name="email"
-                        value={formData.email}
-                        onChange={handleChange}
-                        placeholder="your@email.com"
-                        className={`w-full px-4 py-3 rounded-lg bg-input border font-poppins text-sm placeholder:text-foreground/40 focus:border-accent focus:outline-none transition-colors ${
-                          errors.email ? "border-primary" : "border-border/50"
-                        }`}
-                      />
-                      {errors.email && (
-                        <p className="mt-1 text-sm text-primary">
-                          {errors.email}
-                        </p>
-                      )}
-                    </div>
-                  </div>
-
-                  <div className="grid md:grid-cols-2 gap-4">
-                    <div>
-                      <label className="block font-poppins text-sm font-medium text-foreground/80 mb-2">
-                        Phone Number <span className="text-primary">*</span>
-                      </label>
-                      <input
-                        type="tel"
-                        name="phone"
-                        value={formData.phone}
-                        onChange={handleChange}
-                        placeholder="+91 9876543210"
-                        className={`w-full px-4 py-3 rounded-lg bg-input border font-poppins text-sm placeholder:text-foreground/40 focus:border-accent focus:outline-none transition-colors ${
-                          errors.phone ? "border-primary" : "border-border/50"
-                        }`}
-                      />
-                      {errors.phone && (
-                        <p className="mt-1 text-sm text-primary">
-                          {errors.phone}
-                        </p>
-                      )}
-                    </div>
-                    <div>
-                      <label className="block font-poppins text-sm font-medium text-foreground/80 mb-2">
-                        College Name <span className="text-primary">*</span>
-                      </label>
-                      <input
-                        type="text"
-                        name="college_name"
-                        value={formData.college_name}
-                        onChange={handleChange}
-                        placeholder="Your college/university"
-                        className={`w-full px-4 py-3 rounded-lg bg-input border font-poppins text-sm placeholder:text-foreground/40 focus:border-accent focus:outline-none transition-colors ${
-                          errors.college_name
-                            ? "border-primary"
-                            : "border-border/50"
-                        }`}
-                      />
-                      {errors.college_name && (
-                        <p className="mt-1 text-sm text-primary">
-                          {errors.college_name}
-                        </p>
-                      )}
-                    </div>
-                  </div>
-
-
-                  {/* Team Details */}
-                  <div className="border-t border-border/30 pt-6">
-                    <h3 className="font-bebas text-xl text-foreground/80 mb-4">
-                      Team Details
-                    </h3>
-                    <div className="grid md:grid-cols-2 gap-4">
-                      <div>
-                        <label className="block font-poppins text-sm font-medium text-foreground/80 mb-2">
-                          Team Name <span className="text-primary">*</span>
-                        </label>
-                        <input
-                          type="text"
-                          name="team_name"
-                          value={formData.team_name}
-                          onChange={handleChange}
-                          placeholder="Your team name"
-                          className={`w-full px-4 py-3 rounded-lg bg-input border font-poppins text-sm placeholder:text-foreground/40 focus:border-accent focus:outline-none transition-colors ${
-                            errors.team_name
-                              ? "border-primary"
-                              : "border-border/50"
-                          }`}
-                        />
-                        {errors.team_name && (
-                          <p className="mt-1 text-sm text-primary">
-                            {errors.team_name}
-                          </p>
-                        )}
-                      </div>
-                      <div>
-                        <label className="block font-poppins text-sm font-medium text-foreground/80 mb-2">
-                          Team Size <span className="text-primary">*</span>
-                        </label>
-                        <input
-                          type="number"
-                          name="team_size"
-                          value={formData.team_size}
-                          onChange={handleChange}
-                          min="1"
-                          max="10"
-                          className="w-full px-4 py-3 rounded-lg bg-input border border-border/50 font-poppins text-sm placeholder:text-foreground/40 focus:border-accent focus:outline-none transition-colors"
-                        />
-                         {errors.team_size && (
-                          <p className="mt-1 text-sm text-primary">
-                            {errors.team_size}
-                          </p>
-                        )}
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Payment Details */}
-                  <div className="border-t border-border/30 pt-6">
-                    <h3 className="font-bebas text-xl text-foreground/80 mb-4">
-                      Payment Details
-                    </h3>
-                    <div className="space-y-4">
-                      <div>
-                        <label className="block font-poppins text-sm font-medium text-foreground/80 mb-2">
-                          Transaction ID <span className="text-primary">*</span>
-                        </label>
-                        <input
-                          type="text"
-                          name="transaction_uid"
-                          value={formData.transaction_uid}
-                          onChange={handleChange}
-                          placeholder="Enter Transaction ID (e.g. TXN_...)"
-                          className={`w-full px-4 py-3 rounded-lg bg-input border font-poppins text-sm placeholder:text-foreground/40 focus:border-accent focus:outline-none transition-colors ${
-                            errors.transaction_uid
-                              ? "border-primary"
-                              : "border-border/50"
-                          }`}
-                        />
-                        {errors.transaction_uid && (
-                          <p className="mt-1 text-sm text-primary">
-                            {errors.transaction_uid}
-                          </p>
-                        )}
-                      </div>
-                      <div>
-                        <label className="block font-poppins text-sm font-medium text-foreground/80 mb-2">
-                          Payment Screenshot <span className="text-primary">*</span>
-                        </label>
-                        <input
-                          type="file"
-                          accept="image/*"
-                          onChange={handleFileChange}
-                          className={`w-full px-4 py-3 rounded-lg bg-input border font-poppins text-sm text-foreground/70 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-accent file:text-accent-foreground hover:file:bg-accent/80 transition-colors ${
-                            errors.payment_screenshot
-                              ? "border-primary"
-                              : "border-border/50"
-                          }`}
-                        />
-                        <p className="mt-1 text-xs text-foreground/50">
-                          Max size: 5MB. Formats: JPG, PNG, WebP
-                        </p>
-                        {errors.payment_screenshot && (
-                          <p className="mt-1 text-sm text-primary">
-                            {errors.payment_screenshot}
-                          </p>
-                        )}
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Submit Button */}
-                  <Button
-                    type="submit"
-                    variant="hero"
-                    size="xl"
-                    className="w-full"
-                    disabled={isSubmitting}
-                  >
-                    {isSubmitting ? (
-                      <>
-                        <Loader2 className="w-5 h-5 animate-spin mr-2" />
-                        Registering...
-                      </>
-                    ) : (
-                      "Complete Registration"
-                    )}
-                  </Button>
-
-                  <p className="text-center text-sm text-foreground/50">
-                    By registering, you agree to our terms and conditions.
-                  </p>
+                    {errors.eventName && <p className="text-red-500 text-xs pl-1">{errors.eventName}</p>}
                 </div>
+
+                {/* Solo Fields */}
+                {registrationType === "solo" && (
+                    <div className="space-y-2">
+                        <label className="text-sm font-medium pl-1">Full Name</label>
+                        <input
+                            type="text"
+                            name="fullName"
+                            value={formData.fullName}
+                            onChange={handleChange}
+                            placeholder="Your full name"
+                            className="w-full px-4 py-3 rounded-lg bg-black/40 border border-border/50 focus:border-accent outline-none"
+                        />
+                         {errors.fullName && <p className="text-red-500 text-xs pl-1">{errors.fullName}</p>}
+                    </div>
+                )}
+
+                {/* Team Fields */}
+                {registrationType === "team" && (
+                    <div className="space-y-4">
+                        <div className="space-y-2">
+                            <label className="text-sm font-medium pl-1">Team Name</label>
+                            <input
+                                type="text"
+                                name="teamName"
+                                value={formData.teamName}
+                                onChange={handleChange}
+                                placeholder="Rockstars"
+                                className="w-full px-4 py-3 rounded-lg bg-black/40 border border-border/50 focus:border-accent outline-none"
+                            />
+                            {errors.teamName && <p className="text-red-500 text-xs pl-1">{errors.teamName}</p>}
+                        </div>
+                        <div className="space-y-2">
+                            <label className="text-sm font-medium pl-1">Team Leader</label>
+                            <input
+                                type="text"
+                                name="teamLeader"
+                                value={formData.teamLeader}
+                                onChange={handleChange}
+                                placeholder="Leader Name"
+                                className="w-full px-4 py-3 rounded-lg bg-black/40 border border-border/50 focus:border-accent outline-none"
+                            />
+                            {errors.teamLeader && <p className="text-red-500 text-xs pl-1">{errors.teamLeader}</p>}
+                        </div>
+
+                        <div className="space-y-2">
+                            <div className="flex justify-between items-center">
+                                <label className="text-sm font-medium pl-1">Team Members</label>
+                                <Button type="button" size="sm" variant="ghost" onClick={addMember} className="h-6 text-xs text-accent">
+                                    <Plus className="w-3 h-3 mr-1" /> Add Member
+                                </Button>
+                            </div>
+                            <div className="space-y-2">
+                                {formData.teamMembers.map((member, index) => (
+                                    <div key={index} className="flex gap-2">
+                                        <input
+                                            type="text"
+                                            value={member}
+                                            onChange={(e) => handleMemberChange(index, e.target.value)}
+                                            placeholder={`Member ${index + 1}`}
+                                            className="flex-1 px-4 py-2 rounded-lg bg-black/40 border border-border/50 focus:border-accent outline-none text-sm"
+                                        />
+                                        {formData.teamMembers.length > 1 && (
+                                            <Button 
+                                                type="button" 
+                                                variant="ghost" 
+                                                size="icon" 
+                                                className="text-white/40 hover:text-red-500"
+                                                onClick={() => removeMember(index)}
+                                            >
+                                                <Trash2 className="w-4 h-4" />
+                                            </Button>
+                                        )}
+                                    </div>
+                                ))}
+                            </div>
+                            {errors.teamMembers && <p className="text-red-500 text-xs pl-1">{errors.teamMembers}</p>}
+                            {/* Check individual member errors from Zod path teamMembers.0 etc */}
+                        </div>
+                    </div>
+                )}
+
+                {/* Payment Fields (Common) */}
+                <div className="pt-4 border-t border-white/10 space-y-4">
+                     <h3 className="font-bebas text-lg opacity-80">Payment Details</h3>
+                     <div className="space-y-2">
+                        <label className="text-sm font-medium pl-1">Transaction ID</label>
+                        <input
+                            type="text"
+                            name="transactionUid"
+                            value={formData.transactionUid}
+                            onChange={handleChange}
+                            placeholder="UPI/Bank Transaction ID"
+                            className="w-full px-4 py-3 rounded-lg bg-black/40 border border-border/50 focus:border-accent outline-none"
+                        />
+                         {errors.transactionUid && <p className="text-red-500 text-xs pl-1">{errors.transactionUid}</p>}
+                    </div>
+                     <div className="space-y-2">
+                        <label className="text-sm font-medium pl-1">Screenshot</label>
+                        <input
+                            type="file"
+                            accept="image/*"
+                            onChange={handleFileChange}
+                            className="w-full px-4 py-3 rounded-lg bg-black/40 border border-border/50 focus:border-accent outline-none file:bg-accent file:text-accent-foreground file:border-0 file:rounded-md file:mr-4 file:px-2 file:text-sm"
+                        />
+                         {errors.paymentScreenshot && <p className="text-red-500 text-xs pl-1">{errors.paymentScreenshot}</p>}
+                    </div>
+                </div>
+
+                <Button
+                  type="submit"
+                  variant="hero"
+                  size="xl"
+                  className="w-full mt-4"
+                  disabled={isSubmitting}
+                >
+                  {isSubmitting ? <Loader2 className="animate-spin mr-2" /> : null}
+                  Submit Registration
+                </Button>
+
               </form>
-            </motion.div>
-          </div>
+            </div>
+          </motion.div>
         </main>
         <Footer />
       </div>

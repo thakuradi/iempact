@@ -5,17 +5,31 @@ import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { Helmet } from "react-helmet-async";
 import { motion } from "framer-motion";
-import { Loader2, User, Calendar, Award, Receipt, CheckCircle, AlertCircle } from "lucide-react";
+import { Loader2, User, Calendar, Award, Receipt, CheckCircle, AlertCircle, Users, Phone } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import {
+    Dialog,
+    DialogContent,
+    DialogHeader,
+    DialogTitle,
+    DialogTrigger,
+} from "@/components/ui/dialog";
 
 interface Registration {
   _id: string;
-  teamName: string;
-  teamNumber: string;
+  registrationType: "solo" | "team";
   eventName: string;
+  transactionUid: string;
   paymentScreenshotUrl: string;
-  createdAt: string;
   verified: boolean;
+  createdAt: string;
+  // Solo fields
+  fullName?: string;
+  // Team fields
+  teamName?: string;
+  teamLeader?: string;
+  teamMembers?: string[];
+  teamNumber?: string;
 }
 
 interface UserProfile {
@@ -52,7 +66,10 @@ const Profile = () => {
 
         if (response.data.success) {
           setUser(response.data.user);
-          setRegistrations(response.data.registrations || []);
+          // Sort registrations by newest first
+          const regs = response.data.registrations || [];
+          regs.sort((a: Registration, b: Registration) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
+          setRegistrations(regs);
         } else {
             setError(response.data.message || "Failed to load profile.");
         }
@@ -137,55 +154,116 @@ const Profile = () => {
                              <Button variant="outline" onClick={() => navigate("/events")}>Browse Events</Button>
                          </div>
                     ) : (
-                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                             {registrations.map((reg, index) => (
                                 <motion.div 
                                     key={reg._id}
                                     initial={{ opacity: 0, scale: 0.95 }}
                                     animate={{ opacity: 1, scale: 1 }}
                                     transition={{ delay: 0.1 + index * 0.05 }}
-                                    className="bg-card/20 hover:bg-card/40 transition-colors border border-border/30 rounded-xl p-5 flex flex-col h-full"
+                                    className="bg-card/20 hover:bg-card/40 transition-colors border border-border/30 rounded-xl p-6 flex flex-col gap-4 relative overflow-hidden group"
                                 >
-                                    <div className="flex items-start justify-between mb-4">
-                                        <div className="p-2 bg-primary/10 rounded-lg">
-                                            <Award className="w-6 h-6 text-primary" />
-                                        </div>
-                                        {/* Status Badge */}
-                                        {reg.verified ? (
-                                            <span className="bg-green-500/10 text-green-500 text-xs px-2 py-1 rounded-full border border-green-500/20 flex items-center gap-1">
-                                                <CheckCircle className="w-3 h-3" /> Verified
+                                    {/* Type Badge */}
+                                    <div className="absolute top-4 right-4">
+                                        {reg.registrationType === 'team' ? (
+                                            <span className="inline-flex items-center gap-1 px-2 py-1 rounded-md bg-purple-500/10 text-purple-400 text-xs border border-purple-500/20">
+                                                <Users className="w-3 h-3" /> Team
                                             </span>
                                         ) : (
-                                            <span className="bg-yellow-500/10 text-yellow-500 text-xs px-2 py-1 rounded-full border border-yellow-500/20 flex items-center gap-1">
-                                                 <AlertCircle className="w-3 h-3" /> Pending
+                                            <span className="inline-flex items-center gap-1 px-2 py-1 rounded-md bg-blue-500/10 text-blue-400 text-xs border border-blue-500/20">
+                                                <User className="w-3 h-3" /> Solo
                                             </span>
                                         )}
                                     </div>
-                                    
-                                    <h3 className="font-bebas text-2xl mb-2 line-clamp-1">{reg.eventName}</h3>
-                                    
-                                    <div className="space-y-2 mb-4 flex-grow">
-                                        <div className="flex items-center text-sm text-foreground/70">
-                                            <User className="w-4 h-4 mr-2 opacity-70" />
-                                            <span>Team: {reg.teamName}</span>
-                                        </div>
-                                         <div className="flex items-center text-sm text-foreground/70">
-                                            <Calendar className="w-4 h-4 mr-2 opacity-70" />
-                                            <span>{new Date(reg.createdAt).toLocaleDateString()}</span>
+
+                                    <div>
+                                        <h3 className="font-bebas text-2xl tracking-wide mb-1 pr-16">{reg.eventName}</h3>
+                                        <div className="flex items-center gap-2 text-sm text-foreground/60">
+                                            <Calendar className="w-3 h-3" />
+                                            <span>Registered on {new Date(reg.createdAt).toLocaleDateString()}</span>
                                         </div>
                                     </div>
 
-                                    {reg.paymentScreenshotUrl && (
-                                         <a 
-                                            href={reg.paymentScreenshotUrl} 
-                                            target="_blank" 
-                                            rel="noopener noreferrer"
-                                            className="text-xs flex items-center justify-center gap-2 p-2 rounded-lg bg-background/50 hover:bg-accent/20 text-foreground/80 hover:text-accent transition-all border border-border/30"
-                                         >
-                                            <Receipt className="w-3 h-3" />
-                                            View Receipt
-                                         </a>
-                                    )}
+                                    <div className="space-y-3 bg-card/30 p-4 rounded-lg">
+                                        <div className="flex items-center justify-between text-sm">
+                                            <span className="text-foreground/50">Participant</span>
+                                            <span className="font-medium text-foreground/90">
+                                                {reg.registrationType === 'team' ? reg.teamName : reg.fullName || "N/A"}
+                                            </span>
+                                        </div>
+                                        
+                                        {reg.teamNumber && (
+                                           <div className="flex items-center justify-between text-sm">
+                                                <span className="text-foreground/50">Contact/Info</span>
+                                                <span className="font-mono text-xs">{reg.teamNumber}</span>
+                                            </div> 
+                                        )}
+
+                                        <div className="flex items-center justify-between text-sm">
+                                            <span className="text-foreground/50">Txn ID</span>
+                                            <span className="font-mono text-xs">{reg.transactionUid}</span>
+                                        </div>
+
+                                        <div className="flex items-center justify-between text-sm">
+                                            <span className="text-foreground/50">Status</span>
+                                            {reg.verified ? (
+                                                <span className="text-green-500 flex items-center gap-1 text-xs">
+                                                    <CheckCircle className="w-3 h-3" /> Verified
+                                                </span>
+                                            ) : (
+                                                <span className="text-yellow-500 flex items-center gap-1 text-xs">
+                                                    <AlertCircle className="w-3 h-3" /> Pending Review
+                                                </span>
+                                            )}
+                                        </div>
+                                    </div>
+
+                                    <div className="flex items-center gap-3 pt-2">
+                                        {reg.paymentScreenshotUrl && (
+                                            <a 
+                                                href={reg.paymentScreenshotUrl} 
+                                                target="_blank" 
+                                                rel="noopener noreferrer"
+                                                className="flex-1 text-xs flex items-center justify-center gap-2 py-2 rounded-lg bg-background/50 hover:bg-accent/20 text-foreground/80 hover:text-accent transition-all border border-border/30"
+                                            >
+                                                <Receipt className="w-3 h-3" />
+                                                View Receipt
+                                            </a>
+                                        )}
+                                        
+                                        {reg.registrationType === 'team' && (
+                                            <Dialog>
+                                                <DialogTrigger asChild>
+                                                    <Button variant="outline" size="sm" className="flex-1 h-9 bg-background/50 border-border/30 hover:bg-accent/10">
+                                                        <Users className="w-3 h-3 mr-2" /> Team Details
+                                                    </Button>
+                                                </DialogTrigger>
+                                                <DialogContent>
+                                                    <DialogHeader>
+                                                        <DialogTitle>{reg.teamName} - Team Info</DialogTitle>
+                                                    </DialogHeader>
+                                                    <div className="space-y-4 pt-4">
+                                                        <div>
+                                                            <h4 className="text-sm font-medium text-foreground/70">Team Leader</h4>
+                                                            <p className="text-base">{reg.teamLeader || "N/A"}</p>
+                                                        </div>
+                                                        <div>
+                                                            <h4 className="text-sm font-medium text-foreground/70 mb-2">Team Members</h4>
+                                                            {reg.teamMembers && reg.teamMembers.length > 0 ? (
+                                                                <ul className="list-disc pl-5 space-y-1 text-sm text-foreground/80">
+                                                                    {reg.teamMembers.map((member, i) => (
+                                                                        <li key={i}>{member}</li>
+                                                                    ))}
+                                                                </ul>
+                                                            ) : (
+                                                                <p className="text-sm text-foreground/40 italic">No members listed</p>
+                                                            )}
+                                                        </div>
+                                                    </div>
+                                                </DialogContent>
+                                            </Dialog>
+                                        )}
+                                    </div>
                                 </motion.div>
                             ))}
                         </div>
