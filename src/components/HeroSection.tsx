@@ -33,7 +33,7 @@ export function HeroSection() {
   }, []);
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center pb-8">
+    <section className="relative min-h-screen flex items-center justify-center pb-8 pt-32">
       <div className="container mx-auto px-4 text-center">
 
         {/* ================= MAIN TITLE (SAMARKAN ONLY) ================= */}
@@ -49,48 +49,19 @@ export function HeroSection() {
             <div
               className="
                 flex flex-wrap justify-center gap-2
-                font-perandory
-                tracking-normal
-                text-[5.5rem]
-                sm:text-[8rem]
-                md:text-[9rem]
-                lg:text-[11rem]
+                text-7xl font-semibold sm:text-8xl lg:font-normal lg:text-9xl tracking-wider font-perandorySemiCondensed pt-2
                 leading-none
                 select-none
+                text-[#e0f4e2] drop-shadow-lg
               "
             >
-              {TITLES[index].split("").map((char, i) =>
-                char === " " ? (
-                  <span key={i} className="w-6" />
-                ) : (
-                  <motion.span
-                    key={i}
-                    animate={{
-                      y: i % 2 === 0 ? [0, -8, 0] : [0, 8, 0],
-                    }}
-                    transition={{
-                      duration: 3.8,
-                      repeat: Infinity,
-                      ease: "easeInOut",
-                    }}
-                    style={{
-                      color: festColors[i % festColors.length],
-                      textShadow: `
-                        -2px -2px 0 rgba(0,0,0,0.55),
-                        2px -2px 0 rgba(0,0,0,0.55),
-                        -2px 2px 0 rgba(0,0,0,0.55),
-                        2px 2px 0 rgba(0,0,0,0.55),
-                        8px 12px 22px rgba(0,0,0,0.6)
-                      `,
-                    }}
-                  >
-                    {char}
-                  </motion.span>
-                )
-              )}
+              {TITLES[index]}
             </div>
+            {/* Added a subtle duplicate for a slight depth effect without the heavy carnival shadow if needed, or just keep it clean. 
+                User reference 'THE IEMPACT' is very clean. keeping it clean. */}
           </motion.div>
         </AnimatePresence>
+
 
         {/* ================= SUBHEADING (RYE) ================= */}
         <p
