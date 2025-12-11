@@ -1,189 +1,116 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
-import {
-  Facebook,
-  Twitter,
-  Instagram,
-  Linkedin,
-  Send,
-  Mail,
-  MapPin,
-} from "lucide-react";
-
-const footerLinks = {
-  main: [
-    { name: "Home", href: "/" },
-    { name: "About", href: "/about" },
-    { name: "Events", href: "/events" },
-    { name: "Schedule", href: "/schedule" },
-  ],
-  support: [
-    { name: "Contact Us", href: "/contact" },
-    { name: "Register", href: "/register" },
-    { name: "Sponsorship", href: "/sponsors" },
-    { name: "FAQ", href: "/faq" },
-  ],
-  legal: [
-    { name: "Privacy Policy", href: "/privacy" },
-    { name: "Terms of Service", href: "/terms" },
-  ],
-};
-
-const socialLinks = [
-  { icon: Facebook, href: "#" },
-  { icon: Twitter, href: "#" },
-  { icon: Instagram, href: "#" },
-  { icon: Linkedin, href: "#" },
-];
+import { Instagram, Mail, MapPin } from "lucide-react";
 
 export function Footer() {
   return (
-    <footer className="relative bg-background pt-20 pb-10 overflow-hidden border-t border-border/40">
-      {/* Background Gradient Blob */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-[500px] bg-accent/5 blur-[120px] rounded-full pointer-events-none" />
+    <footer className="relative bg-[#3a0000] pt-20 pb-10 overflow-hidden border-t border-white/10">
+      {/* Soft Gold Glow */}
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[90%] h-[380px] bg-gradient-to-b from-yellow-500/10 to-transparent blur-[90px]"></div>
 
-      <div className="container mx-auto px-4 relative z-10">
+      <div className="container mx-auto px-6 relative z-20">
+        {/* Grid Layout */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-12 mb-16">
-          {/* Brand Column (Left - 4 cols) */}
-          <div className="lg:col-span-4 space-y-6">
-            <Link to="/" className="flex items-center gap-2 group">
-              <span className="font-perandory text-4xl text-transparent bg-clip-text bg-gradient-to-r from-accent to-secondary group-hover:opacity-80 transition-opacity">
-                IMPACT
-              </span>
-              <span className="font-perandory text-4xl text-foreground">2026</span>
-            </Link>
-            <p className="font-perandory text-foreground/60 max-w-sm leading-relaxed tracking-wide">
-              Empowering the next generation of innovators. Join us for a
-              transformative experience where tradition meets future technology.
-            </p>
 
-            {/* Social Icons */}
-            <div className="flex gap-4">
-              {socialLinks.map((social, idx) => (
-                <motion.a
-                  key={idx}
-                  href={social.href}
-                  whileHover={{ y: -5 }}
-                  className="w-10 h-10 rounded-full bg-foreground/5 hover:bg-accent hover:text-white flex items-center justify-center transition-colors border border-border/50"
-                >
-                  <social.icon size={18} />
-                </motion.a>
-              ))}
+          {/* LEFT SECTION */}
+          <div className="lg:col-span-4 space-y-6">
+            <div>
+              <h1 className="font-bebas text-5xl text-yellow-400 tracking-wide">
+                IMPACT <span className="text-white">2026</span>
+              </h1>
             </div>
+
+
+            {/* Instagram */}
+            <motion.a
+              href="https://www.instagram.com/iempact_2k26?igsh=eXZtZHJ4cHV5Ym1l"
+              whileHover={{ y: -4 }}
+              className="inline-flex items-center justify-center w-12 h-12 
+                         rounded-full border border-yellow-400/40 
+                         hover:border-yellow-300 hover:bg-yellow-300/10 
+                         text-yellow-300 transition-all"
+            >
+              <Instagram size={22} />
+            </motion.a>
           </div>
 
-          {/* Links Columns (Middle - 2 cols each) */}
+          {/* NAVIGATION */}
           <div className="lg:col-span-2 space-y-6">
-            <h4 className="font-perandoryCondensed text-xl text-foreground tracking-wide">
+            <h4 className="font-bebas text-xl text-yellow-400 tracking-wide">
               Navigation
             </h4>
-            <ul className="space-y-3">
-              {footerLinks.main.map((link) => (
-                <li key={link.name}>
-                  <Link
-                    to={link.href}
-                    className="font-perandory text-sm text-foreground/60 hover:text-accent transition-colors flex items-center gap-2 group tracking-wide"
-                  >
-                    <span className="w-0 h-px bg-accent transition-all group-hover:w-4" />
-                    {link.name}
-                  </Link>
-                </li>
-              ))}
+            <ul className="space-y-3 text-white/70">
+              <li><Link to="/">Home</Link></li>
+              <li><Link to="/about">About</Link></li>
+              <li><Link to="/events">Events</Link></li>
+              <li><Link to="/schedule">Schedule</Link></li>
             </ul>
           </div>
 
+          {/* SUPPORT */}
           <div className="lg:col-span-2 space-y-6">
-            <h4 className="font-perandoryCondensed text-xl text-foreground tracking-wide">
+            <h4 className="font-bebas text-xl text-yellow-400 tracking-wide">
               Support
             </h4>
-            <ul className="space-y-3">
-              {footerLinks.support.map((link) => (
-                <li key={link.name}>
-                  <Link
-                    to={link.href}
-                    className="font-perandory text-sm text-foreground/60 hover:text-accent transition-colors flex items-center gap-2 group tracking-wide"
-                  >
-                    <span className="w-0 h-px bg-accent transition-all group-hover:w-4" />
-                    {link.name}
-                  </Link>
-                </li>
-              ))}
+            <ul className="space-y-3 text-white/70">
+              <li><Link to="/contact">Contact Us</Link></li>
+              <li><Link to="/register">Register</Link></li>
+              <li><Link to="/sponsors">Sponsorship</Link></li>
+              <li><Link to="/faq">FAQ</Link></li>
             </ul>
           </div>
 
-          {/* Newsletter Column (Right - 4 cols) */}
+          {/* CONTACT + LOCATION */}
           <div className="lg:col-span-4 space-y-6">
-            <h4 className="font-perandoryCondensed text-xl text-foreground tracking-wide">
-              Stay Updated
-            </h4>
-            <p className="font-perandory text-sm text-foreground/60 tracking-wide">
-              Subscribe to our newsletter for the latest announcements and
-              schedule updates.
-            </p>
-            <form
-              className="flex flex-col gap-3"
-              onSubmit={(e) => e.preventDefault()}
-            >
-              <div className="relative">
-                <input
-                  type="email"
-                  placeholder="Enter your email"
-                  className="w-full bg-foreground/5 border border-border/40 rounded-lg px-4 py-3 text-sm focus:outline-none focus:border-accent transition-colors text-foreground placeholder:text-foreground/30 font-perandory"
-                />
-                <button
-                  type="submit"
-                  className="absolute right-2 top-1/2 -translate-y-1/2 p-2 bg-accent text-white rounded-md hover:bg-accent/80 transition-colors"
-                >
-                  <Send size={16} />
-                </button>
-              </div>
-            </form>
 
-            <div className="space-y-2 pt-4">
-              <div className="flex items-center gap-3 text-sm text-foreground/60 font-perandory">
-                <Mail size={16} className="text-accent" />
-                <span>hello@impact2026.com</span>
-              </div>
-              <div className="flex items-center gap-3 text-sm text-foreground/60 font-perandory">
-                <MapPin size={16} className="text-accent" />
-                <span>Kolkata, West Bengal, India</span>
-              </div>
+            <h4 className="font-bebas text-xl text-yellow-400 tracking-wide">
+              Contact & Location
+            </h4>
+
+            {/* Email */}
+            <div className="flex items-center gap-3 text-white/80">
+              <Mail className="text-yellow-300" size={18} />
+              <span>iempact@iem.edu.in</span>
             </div>
+
+            {/* Address */}
+            <div className="flex items-center gap-3 text-white/80 leading-relaxed max-w-xs">
+              <MapPin className="text-yellow-300" size={18} />
+              <span>
+                IEM Management Building, D-1, Street No. 13, EP Block, Sector V,  
+                Bidhannagar, Kolkata, West Bengal 700091
+              </span>
+            </div>
+
+            {/* Map with hover zoom + soft gold border */}
+            <motion.div
+              whileHover={{ scale: 1.02 }}
+              className="rounded-xl overflow-hidden border border-white/10 hover:border-yellow-400/40 transition-all shadow-lg shadow-black/40"
+            >
+              <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3688.757907629798!2d88.42893!3d22.57566!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a0275d524f26e31%3A0xf3aaee47cebb6a2!2sIEM%20Management%20House!5e0!3m2!1sen!2sin!4v1702399383921"
+                width="100%"
+                height="200"
+                style={{ border: 0 }}
+                allowFullScreen
+                loading="lazy"
+              ></iframe>
+            </motion.div>
           </div>
         </div>
 
-        {/* Separator */}
-        <div className="h-px w-full bg-gradient-to-r from-transparent via-foreground/10 to-transparent my-8" />
+        {/* Divider */}
+        <div className="h-px w-full bg-gradient-to-r from-transparent via-white/20 to-transparent my-10"></div>
 
         {/* Bottom Bar */}
-        <div className="flex flex-col md:flex-row justify-between items-center gap-4 text-xs font-perandory text-foreground/40 tracking-wider">
-          <p>© 2026 IMPACT Conference. All rights reserved.</p>
-          <div className="flex gap-6">
-            {footerLinks.legal.map((link) => (
-              <Link
-                key={link.name}
-                to={link.href}
-                className="hover:text-foreground transition-colors"
-              >
-                {link.name}
-              </Link>
-            ))}
-          </div>
-        </div>
+        <div className="flex flex-col md:flex-row justify-between items-center text-xs text-white/50">
+          <p>© 2026 IMPACT. All rights reserved.</p>
 
-        {/* Giant Decorative Text */}
-        <div className="absolute bottom-0 left-0 w-full overflow-hidden pointer-events-none opacity-[0.03]">
-          <motion.div
-            animate={{ x: ["0%", "-50%"] }}
-            transition={{ duration: 30, ease: "linear", repeat: Infinity }}
-            className="whitespace-nowrap"
-          >
-            <span className="font-perandory text-[15vw] leading-[0.8]">
-              WHERE TRADITION MEETS INNOVATION — WHERE TRADITION MEETS
-              INNOVATION —
-            </span>
-          </motion.div>
+          <div className="flex gap-6">
+            <Link to="/privacy" className="hover:text-white">Privacy Policy</Link>
+            <Link to="/terms" className="hover:text-white">Terms of Service</Link>
+          </div>
         </div>
       </div>
     </footer>

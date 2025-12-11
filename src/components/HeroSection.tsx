@@ -1,25 +1,14 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { Calendar, MapPin, ArrowRight, Ticket } from "lucide-react";
+import { Calendar, MapPin, Ticket } from "lucide-react";
 
-/* 🎨 Carnival colors */
-const festColors = [
-  "#FFD34E",
-  "#4DA8FF",
-  "#67D66F",
-  "#FF914D",
-  "#B983FF",
-  "#FF6F91",
-];
+const LOGOS = ["/logoverse.png", "/Pact_main.png"];
 
-/* 🔁 Title loop */
-const TITLES = ["IEMPACT 2026", "MELAVERSE"];
-
-const titleSwap = {
-  initial: { opacity: 0 },
-  animate: { opacity: 1, transition: { duration: 0.6 } },
-  exit: { opacity: 0, transition: { duration: 0.4 } },
+const logoSwap = {
+  initial: { opacity: 0, scale: 0.95 },
+  animate: { opacity: 1, scale: 1, transition: { duration: 0.6 } },
+  exit: { opacity: 0, scale: 0.95, transition: { duration: 0.4 } },
 };
 
 export function HeroSection() {
@@ -27,119 +16,121 @@ export function HeroSection() {
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setIndex((i) => (i + 1) % TITLES.length);
+      setIndex((i) => (i + 1) % LOGOS.length);
     }, 4000);
     return () => clearInterval(interval);
   }, []);
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center pb-8 pt-32">
-      <div className="container mx-auto px-4 text-center">
+    <section className="relative min-h-screen flex items-start justify-center">
+      
+      <div
+        className="
+          flex flex-col items-center justify-center w-full text-center
+          pt-24 sm:pt-40 lg:pt-48
+          pb-2 sm:pb-0        /* ⬅ less bottom gap on phone */
+        "
+      >
 
-        {/* ================= MAIN TITLE (SAMARKAN ONLY) ================= */}
+        {/* LOGO */}
         <AnimatePresence mode="wait">
           <motion.div
-            key={TITLES[index]}
-            variants={titleSwap}
+            key={LOGOS[index]}
+            variants={logoSwap}
             initial="initial"
             animate="animate"
             exit="exit"
-            className="mb-3"
+            className="
+              flex justify-center 
+              mt-16 sm:mt-10 lg:mt-0   /* ⬅ logo slightly lower only on phone */
+            "
           >
-            <div
+            <motion.img
+              src={LOGOS[index]}
+              alt="Fest Logo"
               className="
-                flex flex-wrap justify-center gap-2
-                text-7xl font-semibold sm:text-8xl lg:font-normal lg:text-9xl tracking-wider font-perandorySemiCondensed pt-2
-                leading-none
-                select-none
-                text-[#e0f4e2] drop-shadow-lg
+                w-[290px]
+                sm:w-[430px]
+                md:w-[600px]
+                lg:w-[720px]
+                xl:w-[820px]
+                h-auto select-none
               "
-            >
-              {TITLES[index]}
-            </div>
-            {/* Added a subtle duplicate for a slight depth effect without the heavy carnival shadow if needed, or just keep it clean. 
-                User reference 'THE IEMPACT' is very clean. keeping it clean. */}
+              animate={{ scale: [1, 1.05, 1] }}
+              transition={{ duration: 3.8, repeat: Infinity, ease: "easeInOut" }}
+            />
           </motion.div>
         </AnimatePresence>
 
-
-        {/* ================= SUBHEADING (RYE) ================= */}
+        {/* SUBHEADING — closer to logo on phone */}
         <p
           className="
-            mx-auto mt-1
-            text-[1.25rem] sm:text-[1.35rem] md:text-[1.45rem]
-            font-perandoryCondensed
-            tracking-wide
-            leading-none
-            text-white/90
-            whitespace-nowrap
+            mt-2 sm:mt-4      /* ⬅ reduced gap on phone */
+            text-[1rem] 
+            sm:text-[1.25rem] md:text-[1.45rem]
+            font-['Rye'] text-white/90 whitespace-nowrap
           "
         >
           An escape from the clockwork of days into the living rhythm of the Mela.
         </p>
 
-        {/* ================= DATE + VENUE (RYE) ================= */}
-        <div className="flex flex-wrap justify-center gap-4 mt-4 mb-12 md:mb-16 font-perandoryCondensed">
-          <div className="px-6 py-2.5 rounded-full bg-yellow-300 text-black text-sm flex items-center gap-2 shadow-md border-2 border-yellow-600/60">
-            <Calendar className="w-4 h-4" />
-            January 17–18, 2026
+        {/* DATE + LOCATION — reduced spacing */}
+        <div
+          className="
+            flex flex-row justify-center gap-2 
+            mt-3 sm:mt-4         /* ⬅ tighter spacing on phone */
+            mb-4 sm:mb-10        /* ⬅ less gap below on phone */
+            font-['Rye']
+          "
+        >
+          <div className="px-4 py-2 rounded-full bg-yellow-300 text-black text-xs sm:text-sm flex items-center gap-2 shadow-md border-2 border-yellow-600/60">
+            <Calendar className="w-4 h-4" /> January 17–18, 2026
           </div>
 
-          <div className="px-6 py-2.5 rounded-full bg-white text-black text-sm flex items-center gap-2 shadow-md border-2 border-red-500/50">
-            <MapPin className="w-4 h-4" />
-            Main Campus Ground
+          <div className="px-4 py-2 rounded-full bg-white text-black text-xs sm:text-sm flex items-center gap-2 shadow-md border-2 border-red-500/50">
+            <MapPin className="w-4 h-4" /> IEM MANAGEMENT HOUSE
           </div>
         </div>
 
-        {/* ================= CTA BUTTONS (RYE) ================= */}
-        <div className="flex flex-col sm:flex-row justify-center gap-6 font-perandoryCondensed">
+        {/* CTA BUTTONS — reduced margins on phone */}
+        <div
+          className="
+            flex flex-row justify-center gap-2 sm:gap-6 font-['Rye']
+            mt-1 sm:mt-2       /* ⬅ tighter on phone */
+          "
+        >
           <Link
             to="/register"
             className="
-              relative group flex items-center gap-3
+              relative group flex items-center justify-center gap-3
+              w-[145px] sm:w-[230px]
               bg-[#f59e0b] hover:bg-[#fbbf24]
-              text-amber-950 px-8 py-4
+              text-amber-950 px-4 py-3 sm:px-8 sm:py-4
               font-black uppercase tracking-wider
               border-2 border-amber-700
-              transition-all transform
-              hover:-translate-y-1
               shadow-[0_6px_0_#b45309]
-              active:translate-y-0 active:shadow-none
+              transition-all hover:-translate-y-1
             "
-            style={{
-              clipPath:
-                "polygon(18px 0, 100% 0, 100% 100%, 18px 100%, 0 50%)",
-            }}
+            style={{ clipPath: 'polygon(18px 0, 100% 0, 100% 100%, 18px 100%, 0 50%)' }}
           >
-            <span className="border-r border-amber-800/30 pr-4">
-              <Ticket size={22} />
-            </span>
-            Register Now
-            <ArrowRight
-              size={20}
-              className="opacity-0 group-hover:opacity-100 -ml-4 group-hover:ml-0 transition-all"
-            />
+            <Ticket size={18} /> Register
           </Link>
 
           <Link
             to="/events"
             className="
-              relative group flex items-center gap-3
+              relative group flex items-center justify-center gap-3
+              w-[145px] sm:w-[230px]
               bg-white hover:bg-yellow-100
-              text-red-600 px-8 py-4
+              text-red-600 px-4 py-3 sm:px-8 sm:py-[14px]
               font-black uppercase tracking-wider
               border-4 border-red-600
-              transition-all transform
-              hover:-translate-y-1
               shadow-[0_6px_0_#991b1b]
-              active:translate-y-0 active:shadow-none
+              transition-all hover:-translate-y-1
             "
-            style={{
-              clipPath:
-                "polygon(18px 0, 100% 0, 100% 100%, 18px 100%, 0 50%)",
-            }}
+            style={{ clipPath: 'polygon(18px 0, 100% 0, 100% 100%, 18px 100%, 0 50%)' }}
           >
-            Explore Events
+            Events
           </Link>
         </div>
 
