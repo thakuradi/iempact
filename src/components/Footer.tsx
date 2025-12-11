@@ -48,12 +48,12 @@ export function Footer() {
           {/* Brand Column (Left - 4 cols) */}
           <div className="lg:col-span-4 space-y-6">
             <Link to="/" className="flex items-center gap-2 group">
-              <span className="font-bebas text-4xl text-transparent bg-clip-text bg-gradient-to-r from-accent to-secondary group-hover:opacity-80 transition-opacity">
+              <span className="font-perandory text-4xl text-transparent bg-clip-text bg-gradient-to-r from-accent to-secondary group-hover:opacity-80 transition-opacity">
                 IMPACT
               </span>
-              <span className="font-bebas text-4xl text-foreground">2026</span>
+              <span className="font-perandory text-4xl text-foreground">2026</span>
             </Link>
-            <p className="font-poppins text-foreground/60 max-w-sm leading-relaxed">
+            <p className="font-perandory text-foreground/60 max-w-sm leading-relaxed tracking-wide">
               Empowering the next generation of innovators. Join us for a
               transformative experience where tradition meets future technology.
             </p>
@@ -75,7 +75,7 @@ export function Footer() {
 
           {/* Links Columns (Middle - 2 cols each) */}
           <div className="lg:col-span-2 space-y-6">
-            <h4 className="font-bebas text-xl text-foreground tracking-wide">
+            <h4 className="font-perandoryCondensed text-xl text-foreground tracking-wide">
               Navigation
             </h4>
             <ul className="space-y-3">
@@ -83,7 +83,7 @@ export function Footer() {
                 <li key={link.name}>
                   <Link
                     to={link.href}
-                    className="font-poppins text-sm text-foreground/60 hover:text-accent transition-colors flex items-center gap-2 group"
+                    className="font-perandory text-sm text-foreground/60 hover:text-accent transition-colors flex items-center gap-2 group tracking-wide"
                   >
                     <span className="w-0 h-px bg-accent transition-all group-hover:w-4" />
                     {link.name}
@@ -94,7 +94,7 @@ export function Footer() {
           </div>
 
           <div className="lg:col-span-2 space-y-6">
-            <h4 className="font-bebas text-xl text-foreground tracking-wide">
+            <h4 className="font-perandoryCondensed text-xl text-foreground tracking-wide">
               Support
             </h4>
             <ul className="space-y-3">
@@ -102,7 +102,7 @@ export function Footer() {
                 <li key={link.name}>
                   <Link
                     to={link.href}
-                    className="font-poppins text-sm text-foreground/60 hover:text-accent transition-colors flex items-center gap-2 group"
+                    className="font-perandory text-sm text-foreground/60 hover:text-accent transition-colors flex items-center gap-2 group tracking-wide"
                   >
                     <span className="w-0 h-px bg-accent transition-all group-hover:w-4" />
                     {link.name}
@@ -114,10 +114,10 @@ export function Footer() {
 
           {/* Newsletter Column (Right - 4 cols) */}
           <div className="lg:col-span-4 space-y-6">
-            <h4 className="font-bebas text-xl text-foreground tracking-wide">
+            <h4 className="font-perandoryCondensed text-xl text-foreground tracking-wide">
               Stay Updated
             </h4>
-            <p className="font-poppins text-sm text-foreground/60">
+            <p className="font-perandory text-sm text-foreground/60 tracking-wide">
               Subscribe to our newsletter for the latest announcements and
               schedule updates.
             </p>
@@ -129,7 +129,7 @@ export function Footer() {
                 <input
                   type="email"
                   placeholder="Enter your email"
-                  className="w-full bg-foreground/5 border border-border/40 rounded-lg px-4 py-3 text-sm focus:outline-none focus:border-accent transition-colors text-foreground placeholder:text-foreground/30"
+                  className="w-full bg-foreground/5 border border-border/40 rounded-lg px-4 py-3 text-sm focus:outline-none focus:border-accent transition-colors text-foreground placeholder:text-foreground/30 font-perandory"
                 />
                 <button
                   type="submit"
@@ -141,11 +141,11 @@ export function Footer() {
             </form>
 
             <div className="space-y-2 pt-4">
-              <div className="flex items-center gap-3 text-sm text-foreground/60">
+              <div className="flex items-center gap-3 text-sm text-foreground/60 font-perandory">
                 <Mail size={16} className="text-accent" />
                 <span>hello@impact2026.com</span>
               </div>
-              <div className="flex items-center gap-3 text-sm text-foreground/60">
+              <div className="flex items-center gap-3 text-sm text-foreground/60 font-perandory">
                 <MapPin size={16} className="text-accent" />
                 <span>Kolkata, West Bengal, India</span>
               </div>
@@ -157,7 +157,7 @@ export function Footer() {
         <div className="h-px w-full bg-gradient-to-r from-transparent via-foreground/10 to-transparent my-8" />
 
         {/* Bottom Bar */}
-        <div className="flex flex-col md:flex-row justify-between items-center gap-4 text-xs font-poppins text-foreground/40">
+        <div className="flex flex-col md:flex-row justify-between items-center gap-4 text-xs font-perandory text-foreground/40 tracking-wider">
           <p>© 2026 IMPACT Conference. All rights reserved.</p>
           <div className="flex gap-6">
             {footerLinks.legal.map((link) => (
@@ -179,7 +179,7 @@ export function Footer() {
             transition={{ duration: 30, ease: "linear", repeat: Infinity }}
             className="whitespace-nowrap"
           >
-            <span className="font-bebas text-[15vw] leading-[0.8]">
+            <span className="font-perandory text-[15vw] leading-[0.8]">
               WHERE TRADITION MEETS INNOVATION — WHERE TRADITION MEETS
               INNOVATION —
             </span>

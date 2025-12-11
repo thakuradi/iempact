@@ -134,9 +134,9 @@ const Profile = () => {
                          <User className="w-12 h-12 text-accent" />
                     </div>
                     <div className="text-center md:text-left space-y-2">
-                        <h1 className="font-bebas text-4xl md:text-5xl">My <span className="text-gradient-accent">Profile</span></h1>
-                        <p className="font-poppins text-lg text-foreground/80">{user?.email}</p>
-                        <p className="font-poppins text-sm text-foreground/50">Member since {user?.createdAt ? new Date(user.createdAt).toLocaleDateString() : 'N/A'}</p>
+                        <h1 className="font-perandory text-4xl md:text-5xl">My <span className="text-gradient-accent">Profile</span></h1>
+                        <p className="font-perandory text-lg text-foreground/80 tracking-wide">{user?.email}</p>
+                        <p className="font-perandory text-sm text-foreground/50">Member since {user?.createdAt ? new Date(user.createdAt).toLocaleDateString() : 'N/A'}</p>
                     </div>
                 </motion.div>
 
@@ -146,11 +146,11 @@ const Profile = () => {
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.1 }}
                 >
-                    <h2 className="font-bebas text-3xl mb-6 pl-2 border-l-4 border-accent">My Registrations</h2>
+                    <h2 className="font-perandory text-3xl mb-6 pl-2 border-l-4 border-accent">My Registrations</h2>
 
                     {registrations.length === 0 ? (
                          <div className="text-center py-12 bg-card/20 rounded-xl border border-dashed border-border/50">
-                             <p className="font-poppins text-foreground/60 mb-4">You haven't registered for any events yet.</p>
+                             <p className="font-perandory text-foreground/60 mb-4">You haven't registered for any events yet.</p>
                              <Button variant="outline" onClick={() => navigate("/events")}>Browse Events</Button>
                          </div>
                     ) : (
@@ -166,25 +166,25 @@ const Profile = () => {
                                     {/* Type Badge */}
                                     <div className="absolute top-4 right-4">
                                         {reg.registrationType === 'team' ? (
-                                            <span className="inline-flex items-center gap-1 px-2 py-1 rounded-md bg-purple-500/10 text-purple-400 text-xs border border-purple-500/20">
+                                            <span className="inline-flex items-center gap-1 px-2 py-1 rounded-md bg-purple-500/10 text-purple-400 text-xs border border-purple-500/20 font-perandory">
                                                 <Users className="w-3 h-3" /> Team
                                             </span>
                                         ) : (
-                                            <span className="inline-flex items-center gap-1 px-2 py-1 rounded-md bg-blue-500/10 text-blue-400 text-xs border border-blue-500/20">
+                                            <span className="inline-flex items-center gap-1 px-2 py-1 rounded-md bg-blue-500/10 text-blue-400 text-xs border border-blue-500/20 font-perandory">
                                                 <User className="w-3 h-3" /> Solo
                                             </span>
                                         )}
                                     </div>
 
                                     <div>
-                                        <h3 className="font-bebas text-2xl tracking-wide mb-1 pr-16">{reg.eventName}</h3>
-                                        <div className="flex items-center gap-2 text-sm text-foreground/60">
+                                        <h3 className="font-perandory text-2xl tracking-wide mb-1 pr-16">{reg.eventName}</h3>
+                                        <div className="flex items-center gap-2 text-sm text-foreground/60 font-perandory">
                                             <Calendar className="w-3 h-3" />
                                             <span>Registered on {new Date(reg.createdAt).toLocaleDateString()}</span>
                                         </div>
                                     </div>
 
-                                    <div className="space-y-3 bg-card/30 p-4 rounded-lg">
+                                    <div className="space-y-3 bg-card/30 p-4 rounded-lg font-perandory">
                                         <div className="flex items-center justify-between text-sm">
                                             <span className="text-foreground/50">Participant</span>
                                             <span className="font-medium text-foreground/90">

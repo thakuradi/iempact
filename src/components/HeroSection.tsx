@@ -49,12 +49,12 @@ export function HeroSection() {
             <div
               className="
                 flex flex-wrap justify-center gap-2
-                font-samarkan
-                tracking-[-0.04em]
-                text-[6.5rem]
+                font-perandory
+                tracking-normal
+                text-[5.5rem]
                 sm:text-[8rem]
-                md:text-[10rem]
-                lg:text-[12rem]
+                md:text-[9rem]
+                lg:text-[11rem]
                 leading-none
                 select-none
               "
@@ -97,8 +97,8 @@ export function HeroSection() {
           className="
             mx-auto mt-1
             text-[1.25rem] sm:text-[1.35rem] md:text-[1.45rem]
-            font-['Rye']
-            tracking-tight
+            font-perandoryCondensed
+            tracking-wide
             leading-none
             text-white/90
             whitespace-nowrap
@@ -108,7 +108,7 @@ export function HeroSection() {
         </p>
 
         {/* ================= DATE + VENUE (RYE) ================= */}
-        <div className="flex flex-wrap justify-center gap-4 mt-4 mb-12 md:mb-16 font-['Rye']">
+        <div className="flex flex-wrap justify-center gap-4 mt-4 mb-12 md:mb-16 font-perandoryCondensed">
           <div className="px-6 py-2.5 rounded-full bg-yellow-300 text-black text-sm flex items-center gap-2 shadow-md border-2 border-yellow-600/60">
             <Calendar className="w-4 h-4" />
             January 17–18, 2026
@@ -121,7 +121,7 @@ export function HeroSection() {
         </div>
 
         {/* ================= CTA BUTTONS (RYE) ================= */}
-        <div className="flex flex-col sm:flex-row justify-center gap-6 font-['Rye']">
+        <div className="flex flex-col sm:flex-row justify-center gap-6 font-perandoryCondensed">
           <Link
             to="/register"
             className="

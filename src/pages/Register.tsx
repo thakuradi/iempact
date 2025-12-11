@@ -10,18 +10,25 @@ import { toast } from "sonner";
 import { CheckCircle, Loader2, Plus, Trash2, Users, User } from "lucide-react";
 import { z } from "zod";
 
-const events = [
-  "Battle of Bands",
-  "Classical Dance",
-  "Open Mic Night",
-  "Art Exhibition",
-  "Photography Walk",
-  "Hackathon",
-  "Street Dance",
-  "Fashion Show",
-  "Debate Competition",
-  "Quiz Championship",
-];
+const EVENTS = [
+  { id: "westwood", name: "Westwood - Western Solo Singing", type: "solo" },
+  { id: "raagify", name: "Raagify - Eastern Solo Singing", type: "solo" },
+  { id: "voxbox", name: "Voxbox - Solo Beatbox Battle", type: "solo" },
+  { id: "illusion-jam", name: "Illusion Jam - Battle of Bands", type: "team" },
+  { id: "eastern-euphoria", name: "Eastern Euphoria (Solo/Duo/Group)", type: "both" },
+  { id: "step-up", name: "Step Up (Solo, Duo, Team)", type: "both" },
+  { id: "stepistan", name: "Stepistan (Solo Street Dance Battle)", type: "solo" },
+  { id: "halla-bol", name: "Halla Bol - Team", type: "team" },
+  { id: "shrutirawngo", name: "Shrutirawngo (Team)", type: "team" },
+  { id: "futsal", name: "Futsal (Team)", type: "team" },
+  { id: "table-tennis", name: "Table Tennis (Solo/Duo)", type: "both" },
+  { id: "chess", name: "Mind Over Moves - Chess (Solo)", type: "solo" },
+  { id: "bgmi", name: "BGMI - Team", type: "team" },
+  { id: "freefire", name: "FreeFire - Team", type: "team" },
+  { id: "efootball", name: "EFootball - Solo", type: "solo" },
+  { id: "8ball", name: "8 Ball Pool (Solo)", type: "solo" },
+  { id: "quizzard", name: "Quizzard (Solo/Team)", type: "both" },
+] as const;
 
 // Shared schema parts
 const fileSchema = z
@@ -96,6 +103,15 @@ const Register = () => {
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
+
+  // Filter events based on registration type
+  const filteredEvents = EVENTS.filter(event => {
+    if (registrationType === "solo") {
+       return event.type === "solo" || event.type === "both";
+    } else {
+       return event.type === "team" || event.type === "both";
+    }
+  });
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
@@ -261,8 +277,8 @@ const Register = () => {
               <div className="w-20 h-20 rounded-full bg-green-500/20 flex items-center justify-center mx-auto mb-6">
                 <CheckCircle className="w-10 h-10 text-green-500" />
               </div>
-              <h1 className="font-bebas text-4xl mb-2">Registration Complete!</h1>
-              <p className="text-foreground/70 mb-8 font-poppins">
+              <h1 className="font-perandory text-4xl mb-2">Registration Complete!</h1>
+              <p className="text-foreground/70 mb-8 font-perandory">
                 Your {registrationType} registration has been received.
               </p>
               <div className="flex gap-4 justify-center">
@@ -294,10 +310,10 @@ const Register = () => {
             className="max-w-2xl mx-auto"
           >
             <div className="text-center mb-10">
-              <h1 className="font-bebas text-5xl md:text-7xl mb-4">
+              <h1 className="font-perandory text-5xl md:text-7xl mb-4">
                 <span className="text-gradient-accent">Register</span> Now
               </h1>
-              <p className="text-foreground/70 font-poppins">
+              <p className="text-foreground/70 font-perandory text-lg tracking-wide">
                 Join the largest cultural fest.
               </p>
             </div>
@@ -306,8 +322,12 @@ const Register = () => {
               {/* Type Selection Tabs */}
               <div className="flex p-1 bg-black/20 rounded-xl mb-8">
                 <button
-                  onClick={() => setRegistrationType("solo")}
-                  className={`flex-1 flex items-center justify-center gap-2 py-3 rounded-lg text-sm font-medium transition-all ${
+                  onClick={() => {
+                      setRegistrationType("solo");
+                      // Reset event selection when switching types to avoid invalid state
+                      setFormData(prev => ({ ...prev, eventName: "" }));
+                  }}
+                  className={`flex-1 flex items-center justify-center gap-2 py-3 rounded-lg text-sm font-medium transition-all font-perandoryCondensed tracking-wider ${
                     registrationType === "solo"
                       ? "bg-accent text-accent-foreground shadow-lg"
                       : "text-foreground/60 hover:text-foreground hover:bg-white/5"
@@ -317,8 +337,12 @@ const Register = () => {
                   Individual
                 </button>
                 <button
-                  onClick={() => setRegistrationType("team")}
-                  className={`flex-1 flex items-center justify-center gap-2 py-3 rounded-lg text-sm font-medium transition-all ${
+                  onClick={() => {
+                      setRegistrationType("team");
+                      // Reset event selection when switching types
+                      setFormData(prev => ({ ...prev, eventName: "" }));
+                  }}
+                  className={`flex-1 flex items-center justify-center gap-2 py-3 rounded-lg text-sm font-medium transition-all font-perandoryCondensed tracking-wider ${
                     registrationType === "team"
                       ? "bg-accent text-accent-foreground shadow-lg"
                       : "text-foreground/60 hover:text-foreground hover:bg-white/5"
@@ -333,16 +357,16 @@ const Register = () => {
                 
                 {/* Event Selection */}
                 <div className="space-y-2">
-                    <label className="text-sm font-medium pl-1">Event</label>
+                    <label className="text-sm font-medium pl-1 font-perandory tracking-wide">Event</label>
                     <select
                       name="eventName"
                       value={formData.eventName}
                       onChange={handleChange}
-                      className="w-full px-4 py-3 rounded-lg bg-black/40 border border-border/50 focus:border-accent outline-none text-white"
+                      className="w-full px-4 py-3 rounded-lg bg-black/40 border border-border/50 focus:border-accent outline-none text-white font-perandory"
                     >
-                      <option value="">Select Event...</option>
-                      {events.map((e) => (
-                        <option key={e} value={e} className="bg-black">{e}</option>
+                      <option value="" className="bg-black">Select Event...</option>
+                      {filteredEvents.map((e) => (
+                        <option key={e.id} value={e.name} className="bg-black">{e.name}</option>
                       ))}
                     </select>
                     {errors.eventName && <p className="text-red-500 text-xs pl-1">{errors.eventName}</p>}

@@ -55,7 +55,7 @@ export function Navbar() {
           <Link to="/">
           <div className="h-14 md:h-15 overflow-hidden w-24 rounded-[3rem]">
             <img
-              src="/pactlogo.png"
+              src="/Pact2.png"
               alt="PACT logo"
               className="h-14 md:h-15 w-full 
               object-cover brightness-110 contrast-125"
