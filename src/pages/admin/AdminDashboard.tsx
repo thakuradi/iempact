@@ -3,17 +3,32 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import { Button } from "@/components/ui/button";
-import { Loader2, LogOut, CheckCircle, XCircle, Search, UserCheck, AlertCircle } from "lucide-react";
+import { Loader2, LogOut, CheckCircle, XCircle, Search, UserCheck, AlertCircle, Users, User, Phone } from "lucide-react";
 import { toast } from "sonner";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
 
 interface Registration {
   _id: string;
-  teamName: string;
+  registrationType: "solo" | "team";
   eventName: string;
   transactionUid: string;
   paymentScreenshotUrl: string;
   verified: boolean;
   createdAt: string;
+  // Solo fields
+  fullName?: string;
+  // Team fields
+  teamName?: string;
+  teamLeader?: string;
+  teamMembers?: string[];
+  // Mixed use field (sometimes phone, sometimes size)
+  teamNumber?: string;
 }
 
 interface User {
@@ -28,8 +43,16 @@ interface TableRow {
   userId: string;
   userEmail: string;
   registrationId: string;
+  registrationType: "solo" | "team";
   eventName: string;
-  teamName: string;
+  // Display name: Team Name or Solo Full Name
+  displayName: string; 
+  // Extra details for modal/tooltip
+  teamLeader?: string;
+  teamMembers?: string[];
+  
+  teamNumber?: string; // Info field
+
   transactionUid: string;
   paymentScreenshotUrl: string;
   verified: boolean;
@@ -83,12 +106,24 @@ const AdminDashboard = () => {
     usersData.forEach(user => {
         if (user.registrations && user.registrations.length > 0) {
             user.registrations.forEach(reg => {
+                // Determine display name with fallbacks
+                let name = "Unknown";
+                if (reg.registrationType === 'team') {
+                    name = reg.teamName || "Unnamed Team";
+                } else {
+                    name = reg.fullName || reg.teamName || "Unnamed User";
+                }
+
                 flattened.push({
                     userId: user._id,
                     userEmail: user.email,
                     registrationId: reg._id,
+                    registrationType: reg.registrationType,
                     eventName: reg.eventName,
-                    teamName: reg.teamName,
+                    displayName: name,
+                    teamLeader: reg.teamLeader,
+                    teamMembers: reg.teamMembers,
+                    teamNumber: reg.teamNumber,
                     transactionUid: reg.transactionUid,
                     paymentScreenshotUrl: reg.paymentScreenshotUrl,
                     verified: reg.verified,
@@ -97,6 +132,8 @@ const AdminDashboard = () => {
             });
         }
     });
+    // Sort by newest first
+    flattened.sort((a, b) => new Date(b.regCreatedAt).getTime() - new Date(a.regCreatedAt).getTime());
     setTableData(flattened);
   };
 
@@ -126,7 +163,7 @@ const AdminDashboard = () => {
         );
         setTableData(updatedTable);
         
-        // Also update users state if needed, but tableData drives the UI
+        // Also update users state if needed
         const updatedUsers = users.map(user => ({
             ...user,
             registrations: user.registrations?.map(reg => 
@@ -147,7 +184,8 @@ const AdminDashboard = () => {
   const filteredData = tableData.filter(row => 
     row.userEmail.toLowerCase().includes(searchTerm.toLowerCase()) || 
     row.transactionUid.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    row.eventName.toLowerCase().includes(searchTerm.toLowerCase())
+    row.eventName.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    row.displayName.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
   if (isLoading) {
@@ -182,7 +220,7 @@ const AdminDashboard = () => {
                     <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-foreground/50" />
                     <input 
                         type="text" 
-                        placeholder="Search email, txn id..." 
+                        placeholder="Search..." 
                         value={searchTerm}
                         onChange={(e) => setSearchTerm(e.target.value)}
                         className="pl-10 pr-4 py-2 rounded-lg bg-card/50 border border-border/30 focus:border-accent outline-none w-full md:w-64"
@@ -195,9 +233,10 @@ const AdminDashboard = () => {
                 <table className="w-full text-sm">
                     <thead>
                         <tr className="bg-card/40 text-left border-b border-border/30">
-                            <th className="p-4 font-poppins font-medium text-foreground/70">User Email</th>
+                            <th className="p-4 font-poppins font-medium text-foreground/70">Type</th>
+                            <th className="p-4 font-poppins font-medium text-foreground/70">Name/Team</th>
                             <th className="p-4 font-poppins font-medium text-foreground/70">Event</th>
-                            <th className="p-4 font-poppins font-medium text-foreground/70">Team</th>
+                            <th className="p-4 font-poppins font-medium text-foreground/70">Contact/Info</th>
                             <th className="p-4 font-poppins font-medium text-foreground/70">Txn ID</th>
                             <th className="p-4 font-poppins font-medium text-foreground/70">Screenshot</th>
                             <th className="p-4 font-poppins font-medium text-foreground/70">Status</th>
@@ -207,14 +246,67 @@ const AdminDashboard = () => {
                     <tbody>
                         {filteredData.length === 0 ? (
                             <tr>
-                                <td colSpan={7} className="p-8 text-center text-foreground/50">No registrations found.</td>
+                                <td colSpan={8} className="p-8 text-center text-foreground/50">No registrations found.</td>
                             </tr>
                         ) : (
                             filteredData.map((row) => (
                                 <tr key={row.registrationId} className="border-b border-border/10 hover:bg-white/5 transition-colors">
-                                    <td className="p-4 font-medium">{row.userEmail}</td>
+                                    <td className="p-4">
+                                        {row.registrationType === 'team' ? (
+                                            <span className="inline-flex items-center gap-1 px-2 py-1 rounded-md bg-purple-500/10 text-purple-400 text-xs border border-purple-500/20">
+                                                <Users className="w-3 h-3" /> Team
+                                            </span>
+                                        ) : (
+                                            <span className="inline-flex items-center gap-1 px-2 py-1 rounded-md bg-blue-500/10 text-blue-400 text-xs border border-blue-500/20">
+                                                <User className="w-3 h-3" /> Solo
+                                            </span>
+                                        )}
+                                    </td>
+                                    <td className="p-4 font-medium">
+                                        <div className="flex items-center gap-2">
+                                            <div className="flex flex-col">
+                                                <span>{row.displayName}</span>
+                                                <span className="text-xs text-foreground/40">{row.userEmail}</span>
+                                            </div>
+                                            
+                                            {row.registrationType === 'team' && (
+                                                <Dialog>
+                                                    <DialogTrigger asChild>
+                                                        <Button variant="ghost" size="icon" className="h-5 w-5 opacity-50 hover:opacity-100">
+                                                            <Users className="w-3 h-3" />
+                                                        </Button>
+                                                    </DialogTrigger>
+                                                    <DialogContent>
+                                                        <DialogHeader>
+                                                            <DialogTitle>{row.displayName} - Team Details</DialogTitle>
+                                                        </DialogHeader>
+                                                        <div className="space-y-4 pt-4">
+                                                            <div>
+                                                                <h4 className="text-sm font-medium text-foreground/70">Team Leader</h4>
+                                                                <p className="text-base">{row.teamLeader}</p>
+                                                            </div>
+                                                            <div>
+                                                                <h4 className="text-sm font-medium text-foreground/70 mb-2">Team Members</h4>
+                                                                <ul className="list-disc pl-5 space-y-1">
+                                                                    {row.teamMembers?.map((member, i) => (
+                                                                        <li key={i}>{member}</li>
+                                                                    ))}
+                                                                </ul>
+                                                            </div>
+                                                        </div>
+                                                    </DialogContent>
+                                                </Dialog>
+                                            )}
+                                        </div>
+                                    </td>
                                     <td className="p-4">{row.eventName}</td>
-                                    <td className="p-4">{row.teamName}</td>
+                                    <td className="p-4 font-mono text-xs">
+                                        {row.teamNumber ? (
+                                           <span title="Team Number / Phone">{row.teamNumber}</span>
+                                        ) : (
+                                            <span className="opacity-30">-</span>
+                                        )}
+                                    </td>
                                     <td className="p-4 font-mono text-xs">{row.transactionUid}</td>
                                     <td className="p-4">
                                         {row.paymentScreenshotUrl ? (
@@ -264,5 +356,4 @@ const AdminDashboard = () => {
     </>
   );
 };
-
 export default AdminDashboard;
