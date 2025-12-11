@@ -1,48 +1,42 @@
 import { motion } from "framer-motion";
 
-/* ✅ Final event data: Event Name + Subheading only */
+/* ✅ Updated event data: Using your PNGs */
 const events = [
   {
     id: 1,
-    title: "Westwood",
-    subheading: "Western Solo Singing",
-    image:
-      "https://images.unsplash.com/photo-1511379938547-c1f69419868d?auto=format&fit=crop&q=80",
+    title: "Illusion Jam",
+    subheading: "Battle of Bands",
+    image: "/events/Battle of Bands.png",
   },
   {
     id: 2,
-    title: "Raagify",
-    subheading: "Eastern Music",
-    image:
-      "https://images.unsplash.com/photo-1519494080410-f9aa76f1fc1a?auto=format&fit=crop&q=80",
+    title: "Stepistan",
+    subheading: "Dance Competition",
+    image: "/events/Step is tan.png",
   },
   {
     id: 3,
-    title: "Illusion Jam",
-    subheading: "Battle of Bands",
-    image:
-      "https://images.unsplash.com/photo-1511379938547-9c258acb5a0c?auto=format&fit=crop&q=80",
+    title: "Halla Bol",
+    subheading: "Street Play",
+    image: "/events/Halla bol.png",
   },
   {
     id: 4,
-    title: "Eastern Euphoria",
-    subheading: "Eastern Dance",
-    image:
-      "https://images.unsplash.com/photo-1508700115892-45ecd05ae2ad?auto=format&fit=crop&q=80",
+    title: "BGMI",
+    subheading: "E-Sports Tournament",
+    image: "/events/bgmi.png",
   },
   {
     id: 5,
     title: "Step Up",
     subheading: "Western Dance",
-    image:
-      "https://images.unsplash.com/photo-1547153760-18fc86324498?auto=format&fit=crop&q=80",
+    image: "/events/Step up.png",
   },
   {
     id: 6,
-    title: "Halla Bol",
-    subheading: "Street Play",
-    image:
-      "https://images.unsplash.com/photo-1497032205916-ac775f0649ae?auto=format&fit=crop&q=80",
+    title: "Raagify",
+    subheading: "Eastern Music",
+    image: "/events/Raagify.png",
   },
 ];
 
