@@ -134,7 +134,7 @@ export function Navbar() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -10 }}
             className="
-              lg:hidden mt-4 mx-4 rounded-3xl
+              lg:hidden mx-4 rounded-3xl
               bg-black/85 backdrop-blur-xl
               border border-white/10 shadow-2xl
             "

@@ -11,24 +11,133 @@ import { CheckCircle, Loader2, Plus, Trash2, Users, User } from "lucide-react";
 import { z } from "zod";
 
 const EVENTS = [
-  { id: "westwood", name: "Westwood - Western Solo Singing", type: "solo" },
-  { id: "raagify", name: "Raagify - Eastern Solo Singing", type: "solo" },
-  { id: "voxbox", name: "Voxbox - Solo Beatbox Battle", type: "solo" },
-  { id: "illusion-jam", name: "Illusion Jam - Battle of Bands", type: "team" },
-  { id: "eastern-euphoria", name: "Eastern Euphoria (Solo/Duo/Group)", type: "both" },
-  { id: "step-up", name: "Step Up (Solo, Duo, Team)", type: "both" },
-  { id: "stepistan", name: "Stepistan (Solo Street Dance Battle)", type: "solo" },
-  { id: "halla-bol", name: "Halla Bol - Team", type: "team" },
-  { id: "shrutirawngo", name: "Shrutirawngo (Team)", type: "team" },
-  { id: "futsal", name: "Futsal (Team)", type: "team" },
-  { id: "table-tennis", name: "Table Tennis (Solo/Duo)", type: "both" },
-  { id: "chess", name: "Mind Over Moves - Chess (Solo)", type: "solo" },
-  { id: "bgmi", name: "BGMI - Team", type: "team" },
-  { id: "freefire", name: "FreeFire - Team", type: "team" },
-  { id: "efootball", name: "EFootball - Solo", type: "solo" },
-  { id: "8ball", name: "8 Ball Pool (Solo)", type: "solo" },
-  { id: "quizzard", name: "Quizzard (Solo/Team)", type: "both" },
+  { id: "westwood", 
+    name: "Westwood - Western Solo Singing", 
+    type: "solo", 
+    QrLink: "/QR_Codes/solo/westwood.jpeg" 
+  },
+  { id: "raagify", 
+    name: "Raagify - Eastern Solo Singing", 
+    type: "solo", 
+    QrLink: "/QR_Codes/solo/raagify.jpeg" 
+  },
+  { id: "voxbox", 
+    name: "Voxbox - Solo Beatbox Battle", 
+    type: "solo", 
+    QrLink: "/QR_Codes/solo/voxbox.jpeg" 
+  },
+  { id: "illusion-jam", 
+    name: "Illusion Jam - Battle of Bands", 
+    type: "team", 
+    QrLink: "/QR_Codes/group/illusionJam.jpeg" 
+  },
+  { id: "eastern-euphoria-solo", 
+    name: "Eastern Euphoria (Solo)", 
+    type: "solo", 
+    QrLink: "/QR_Codes/solo/EasterEuphoriaSolo.jpeg" 
+  },
+  { id: "eastern-euphoria-duo-team", 
+    name: "Eastern Euphoria (Duo)", 
+    type: "duo", 
+    QrLink: "/QR_Codes/duo/euphoriaDuo.jpeg" 
+  },
+  { id: "eastern-euphoria-duo-team", 
+    name: "Eastern Euphoria (Group)", 
+    type: "team", 
+    QrLink: "/QR_Codes/duo/euphoriaDuo.jpeg" 
+  },
+  { id: "step-up-solo", 
+    name: "Step Up (Solo)", 
+    type: "solo", 
+    QrLink: "/QR_Codes/solo/StepUpSolo.jpeg" 
+  },
+  { id: "step-up-duo", 
+    name: "Step Up (Duo)", 
+    type: "duo", 
+    QrLink: "/QR_Codes/duo/stepUpDuo.jpeg" 
+  },
+  { id: "step-up-team", 
+    name: "Step Up (Team)", 
+    type: "team", 
+    QrLink: "/QR_Codes/group/stepUpGroup.jpeg" 
+  },
+  { id: "stepistan", 
+    name: "Stepistan (Solo Street Dance Battle)", 
+    type: "solo", 
+    QrLink: "/QR_Codes/solo/Stepistan.jpeg" 
+  },
+  { id: "halla-bol", 
+    name: "Halla Bol (Team)", 
+    type: "team", 
+    QrLink: "/QR_Codes/group/HallaBol.jpeg" 
+  },
+  { id: "shrutirawngo", 
+    name: "Shrutirawngo (Team)", 
+    type: "team", 
+    QrLink: "/QR_Codes/group/shrutirawngo.jpeg" 
+  },
+  { id: "futsal", 
+    name: "Futsal (Team)", 
+    type: "team", 
+    QrLink: "/QR_Codes/group/futsal.jpeg" 
+  },
+  { id: "men-table-tennis-solo", 
+    name: "Men's Table Tennis (Solo)", 
+    type: "solo", 
+    QrLink: "/QR_Codes/solo/menSingleTableTennis.jpeg" 
+  },
+  { id: "men-table-tennis-duo", 
+    name: "Men's Table Tennis (Duo)", 
+    type: "duo", 
+    QrLink: "/QR_Codes/duo/TableTennisDoubles.jpeg" 
+  },
+  { id: "women-table-tennis-solo", 
+    name: "Women's Table Tennis (Solo)", 
+    type: "solo", 
+    QrLink: "/QR_Codes/solo/womenSingleTT.jpeg" 
+  },
+  { id: "women-table-tennis-duo", 
+    name: "Women's Table Tennis (Duo)", 
+    type: "duo", 
+    QrLink: "/QR_Codes/duo/TableTennisDoubles.jpeg" 
+  },
+  { id: "chess", 
+    name: "Mind Over Moves - Chess (Solo)", 
+    type: "solo", 
+    QrLink: "/QR_Codes/solo/MindOverMoves(chess).jpeg" 
+  },
+  { id: "bgmi", 
+    name: "BGMI - Team", 
+    type: "team", 
+    QrLink: "/QR_Codes/group/bgmi.jpeg" 
+  },
+  { id: "freefire", 
+    name: "FreeFire (Team)", 
+    type: "team", 
+    QrLink: "/QR_Codes/group/freefire.jpeg" 
+  },
+  { id: "efootball", 
+    name: "EFootball - Solo", 
+    type: "solo", 
+    QrLink: "/QR_Codes/solo/EFootball.jpeg" 
+  },
+  { id: "8ball", 
+    name: "8 Ball Pool (Solo)", 
+    type: "solo", 
+    QrLink: "/QR_Codes/solo/8ball.jpeg" 
+  },
+  { id: "quizzard-solo", 
+    name: "Quizzard (Solo)", 
+    type: "solo", 
+    QrLink: "/QR_Codes/solo/QuizzardSolo.jpeg" 
+  },
+  { id: "quizzard-duo", 
+    name: "Quizzard (Duo)", 
+    type: "duo", 
+    QrLink: "/QR_Codes/duo/quizzardDuo.jpeg" 
+  },
 ] as const;
+
 
 // Shared schema parts
 const fileSchema = z
@@ -107,11 +216,14 @@ const Register = () => {
   // Filter events based on registration type
   const filteredEvents = EVENTS.filter(event => {
     if (registrationType === "solo") {
-       return event.type === "solo" || event.type === "both";
+       return event.type === "solo";
     } else {
-       return event.type === "team" || event.type === "both";
+       // Using "as string" to avoid type errors since we are comparing against string literals not in the original type definition if we didn't update the EVENTS constant fully in one go (which we did, but to be safe)
+       return ["team", "duo", "duo/team"].includes(event.type);
     }
   });
+  
+  const selectedEventObj = EVENTS.find(e => e.name === formData.eventName);
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
@@ -307,11 +419,11 @@ const Register = () => {
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            className="max-w-2xl mx-auto"
+            className="max-w-2xl mx-auto mt-16 md:mt-24"
           >
             <div className="text-center mb-10">
-              <h1 className="font-perandory text-5xl md:text-7xl mb-4">
-                <span className="text-gradient-accent">Register</span> Now
+              <h1 className="font-['Rye'] text-5xl md:text-7xl mb-4">
+                <span className="text-gradient-accent">Register Now</span> 
               </h1>
               <p className="text-foreground/70 font-perandory text-lg tracking-wide">
                 Join the largest cultural fest.
@@ -329,7 +441,7 @@ const Register = () => {
                   }}
                   className={`flex-1 flex items-center justify-center gap-2 py-3 rounded-lg text-sm font-medium transition-all font-perandoryCondensed tracking-wider ${
                     registrationType === "solo"
-                      ? "bg-accent text-accent-foreground shadow-lg"
+                      ? "bg-yellow-500 text-amber-900 font-semibold rounded-lg shadow-lg"
                       : "text-foreground/60 hover:text-foreground hover:bg-white/5"
                   }`}
                 >
@@ -344,7 +456,7 @@ const Register = () => {
                   }}
                   className={`flex-1 flex items-center justify-center gap-2 py-3 rounded-lg text-sm font-medium transition-all font-perandoryCondensed tracking-wider ${
                     registrationType === "team"
-                      ? "bg-accent text-accent-foreground shadow-lg"
+                      ? "bg-yellow-500 text-amber-900 font-semibold rounded-lg shadow-lg"
                       : "text-foreground/60 hover:text-foreground hover:bg-white/5"
                   }`}
                 >
@@ -357,7 +469,8 @@ const Register = () => {
                 
                 {/* Event Selection */}
                 <div className="space-y-2">
-                    <label className="text-sm font-medium pl-1 font-perandory tracking-wide">Event</label>
+                    <label className="text-sm font-medium pl-1 
+                    font-perandory tracking-wide">Event</label>
                     <select
                       name="eventName"
                       value={formData.eventName}
@@ -455,6 +568,24 @@ const Register = () => {
 
                 {/* Payment Fields (Common) */}
                 <div className="pt-4 border-t border-white/10 space-y-4">
+                     {selectedEventObj?.QrLink && (
+                        <div className="mb-6 flex flex-col items-center 
+                        animate-in fade-in zoom-in duration-300">
+                            <p className="text-sm text-center mb-3 
+                            font-perandory text-white/70 tracking-wide uppercase">
+                                Scan QR Code to Pay
+                            </p>
+                            <div className="p-3 bg-white/10 rounded-xl 
+                            border border-white/20 overflow-hidden backdrop-blur-md shadow-2xl">
+                               <img 
+                                 src={selectedEventObj.QrLink} 
+                                 alt="Payment QR Code" 
+                                 className="w-48 h-48 sm:w-56 sm:h-56 
+                                 object-cover transform scale-[1.32] rounded-lg bg-white" 
+                               />
+                            </div>
+                        </div>
+                     )}
                      <h3 className="font-bebas text-lg opacity-80">Payment Details</h3>
                      <div className="space-y-2">
                         <label className="text-sm font-medium pl-1">Transaction ID</label>
@@ -484,7 +615,7 @@ const Register = () => {
                   type="submit"
                   variant="hero"
                   size="xl"
-                  className="w-full mt-4"
+                  className="w-full font-['Rye'] text-amber-900 mt-4 bg-yellow-500"
                   disabled={isSubmitting}
                 >
                   {isSubmitting ? <Loader2 className="animate-spin mr-2" /> : null}

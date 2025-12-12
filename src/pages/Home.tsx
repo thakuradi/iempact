@@ -47,7 +47,7 @@ const Home = () => {
         <div className="relative z-10 min-h-screen">
           <Navbar />
 
-          <main className="relative space-y-24">
+          <main className="relative space-y-8 md:space-y-24">
             <HeroSection />
             <CountdownSection />
             <EventCarousel />
