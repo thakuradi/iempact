@@ -17,7 +17,7 @@ export function Footer() {
           <div className="lg:col-span-4 space-y-6">
             <div>
               <h1 className="font-bebas text-5xl text-yellow-400 tracking-wide">
-                IMPACT <span className="text-white">2026</span>
+                IEMPACT <span className="text-white">2026</span>
               </h1>
             </div>
 
@@ -105,7 +105,7 @@ export function Footer() {
 
         {/* Bottom Bar */}
         <div className="flex flex-col md:flex-row justify-between items-center text-xs text-white/50">
-          <p>© 2026 IMPACT. All rights reserved.</p>
+          <p>© 2026 IEMPACT. All rights reserved.</p>
 
           <div className="flex gap-6">
             <Link to="/privacy" className="hover:text-white">Privacy Policy</Link>
