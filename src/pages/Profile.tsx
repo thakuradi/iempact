@@ -30,6 +30,7 @@ interface Registration {
   teamLeader?: string;
   teamMembers?: string[];
   teamNumber?: string;
+  collegeName?: string;
 }
 
 interface UserProfile {
@@ -190,6 +191,11 @@ const Profile = () => {
                                             <span className="font-medium text-foreground/90">
                                                 {reg.registrationType === 'team' ? reg.teamName : reg.fullName || "N/A"}
                                             </span>
+                                        </div>
+
+                                        <div className="flex items-center justify-between text-sm">
+                                            <span className="text-foreground/50">College</span>
+                                            <span className="font-medium text-foreground/90">{reg.collegeName || "N/A"}</span>
                                         </div>
                                         
                                         {reg.teamNumber && (

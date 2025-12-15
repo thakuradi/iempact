@@ -157,6 +157,7 @@ const soloSchema = z.object({
     .min(2, "Name must be at least 2 characters")
     .max(100, "Name must be less than 100 characters"),
   eventName: z.string().min(1, "Please select an event"),
+  collegeName: z.string().trim().min(1, "College Name is required"),
   transactionUid: z.string().trim().min(1, "Transaction ID is required"),
   paymentScreenshot: fileSchema,
 });
@@ -177,6 +178,7 @@ const teamSchema = z.object({
     .array(z.string().trim().min(1, "Member name cannot be empty"))
     .min(1, "At least one team member is required"),
   eventName: z.string().min(1, "Please select an event"),
+  collegeName: z.string().trim().min(1, "College Name is required"),
   transactionUid: z.string().trim().min(1, "Transaction ID is required"),
   paymentScreenshot: fileSchema,
 });
@@ -205,6 +207,7 @@ const Register = () => {
     teamLeader: "",
     teamMembers: [""] as string[],
     eventName: preselectedEvent,
+    collegeName: "",
     transactionUid: "",
     paymentScreenshot: undefined as unknown as File,
   });
@@ -289,6 +292,7 @@ const Register = () => {
     let validationPayload: any = {
       registrationType,
       eventName: formData.eventName,
+      collegeName: formData.collegeName,
       transactionUid: formData.transactionUid,
       paymentScreenshot: formData.paymentScreenshot,
     };
@@ -336,6 +340,7 @@ const Register = () => {
       const submitData = new FormData();
       submitData.append("registrationType", registrationType);
       submitData.append("eventName", formData.eventName);
+      submitData.append("collegeName", formData.collegeName);
       submitData.append("transactionUid", formData.transactionUid);
       submitData.append("paymentScreenshot", formData.paymentScreenshot);
 
@@ -483,6 +488,20 @@ const Register = () => {
                       ))}
                     </select>
                     {errors.eventName && <p className="text-red-500 text-xs pl-1">{errors.eventName}</p>}
+                </div>
+
+                {/* College Name */}
+                <div className="space-y-2">
+                    <label className="text-sm font-medium pl-1">College Name</label>
+                    <input
+                        type="text"
+                        name="collegeName"
+                        value={formData.collegeName}
+                        onChange={handleChange}
+                        placeholder="Institute/College Name"
+                        className="w-full px-4 py-3 rounded-lg bg-black/40 border border-border/50 focus:border-accent outline-none"
+                    />
+                    {errors.collegeName && <p className="text-red-500 text-xs pl-1">{errors.collegeName}</p>}
                 </div>
 
                 {/* Solo Fields */}
