@@ -136,6 +136,11 @@ const EVENTS = [
     type: "duo", 
     QrLink: "/QR_Codes/duo/quizzardDuo.jpeg" 
   },
+  { id: "panja-arena", 
+    name: "Panja Arena (Arm Wrestling)", 
+    type: "solo", 
+    QrLink: "/QR_Codes/solo/panjaArena.jpeg" 
+  },
 ] as const;
 
 
