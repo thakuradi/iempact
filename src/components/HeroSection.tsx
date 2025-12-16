@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { Calendar, MapPin, Ticket } from "lucide-react";
 
-const LOGOS = ["/logoverse.png", "/Pact_main.png"];
+const LOGOS = ["/mela-verse.svg", "/Pact_main.png"];
 
 const logoSwap = {
   initial: { opacity: 0, scale: 0.95 },
@@ -22,14 +22,14 @@ export function HeroSection() {
   }, []);
 
   return (
-    <section className="relative min-h-screen flex items-start justify-center">
+    <section className="relative md:min-h-screen flex 
+    items-start justify-center">
       
       <div
         className="
           flex flex-col items-center justify-center w-full text-center
           pt-24 sm:pt-40 lg:pt-48
-          pb-2 sm:pb-0        /* ⬅ less bottom gap on phone */
-        "
+          pb-2 sm:pb-0"
       >
 
         {/* LOGO */}
@@ -40,15 +40,17 @@ export function HeroSection() {
             initial="initial"
             animate="animate"
             exit="exit"
-            className="
-              flex justify-center 
-              mt-16 sm:mt-10 lg:mt-0   /* ⬅ logo slightly lower only on phone */
-            "
+            className="w-[85vw] sm:w-[70vw] 
+            h-[20vh] md:h-[45vh]
+            flex justify-center 
+              mt-10 sm:mt-10 lg:mt-0"
           >
             <motion.img
               src={LOGOS[index]}
               alt="Fest Logo"
               className="
+                object-contain
+                md:object:cover
                 w-[290px]
                 sm:w-[430px]
                 md:w-[600px]
@@ -63,40 +65,52 @@ export function HeroSection() {
         </AnimatePresence>
 
         {/* SUBHEADING — closer to logo on phone */}
+        <div className="w-[90vw] text-wrap mb-6">
         <p
           className="
-            mt-2 sm:mt-4      /* ⬅ reduced gap on phone */
+            mt-4 sm:mt-6
+            w-[90%] mx-auto
             text-[1rem] 
             sm:text-[1.25rem] md:text-[1.45rem]
-            font-['Rye'] text-white/90 whitespace-nowrap
+            font-['Rye'] text-white/90
           "
         >
-          An escape from the clockwork of days into the living rhythm of the Mela.
+          An escape from the clockwork of days into the 
+          living rhythm of the Mela.
         </p>
+        </div>
 
         {/* DATE + LOCATION — reduced spacing */}
         <div
           className="
-            flex flex-row justify-center gap-2 
-            mt-3 sm:mt-4         /* ⬅ tighter spacing on phone */
-            mb-4 sm:mb-10        /* ⬅ less gap below on phone */
+            grid grid-cols-2 justify-center gap-6
+            max-w-[85%] 
+            mt-3 sm:mt-4
+            mb-4 sm:mb-10
             font-['Rye']
           "
         >
-          <div className="px-4 py-2 rounded-full bg-yellow-300 text-black text-xs sm:text-sm flex items-center gap-2 shadow-md border-2 border-yellow-600/60">
+          <div className="px-4 py-4 rounded-full 
+          bg-yellow-300 text-black text-[0.5rem] 
+          sm:text-sm flex items-center gap-2 sm:gap-4
+          shadow-md border-2 border-yellow-600/60">
             <Calendar className="w-4 h-4" /> January 17–18, 2026
           </div>
 
-          <div className="px-4 py-2 rounded-full bg-white text-black text-xs sm:text-sm flex items-center gap-2 shadow-md border-2 border-red-500/50">
-            <MapPin className="w-4 h-4" /> IEM MANAGEMENT HOUSE
+          <div className="px-4 py-4 rounded-full 
+          bg-white text-black text-[0.5rem] 
+          sm:text-sm flex items-center gap-2 sm:gap-4 
+          shadow-md border-2 border-red-500/50">
+            <MapPin className="w-4 h-4" /> MANAGEMENT HOUSE
           </div>
         </div>
 
         {/* CTA BUTTONS — reduced margins on phone */}
         <div
           className="
-            flex flex-row justify-center gap-2 sm:gap-6 font-['Rye']
-            mt-1 sm:mt-2       /* ⬅ tighter on phone */
+            grid grid-cols-2 justify-center gap-6 sm:gap-10 
+            font-['Rye']
+            mt-4 sm:mt-6
           "
         >
           <Link
@@ -128,7 +142,8 @@ export function HeroSection() {
               shadow-[0_6px_0_#991b1b]
               transition-all hover:-translate-y-1
             "
-            style={{ clipPath: 'polygon(18px 0, 100% 0, 100% 100%, 18px 100%, 0 50%)' }}
+            style={{clipPath: 'polygon(0 0, 90% 0, 100% 50%, 90% 100%, 0 100%)'}}
+
           >
             Events
           </Link>

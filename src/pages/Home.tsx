@@ -3,6 +3,7 @@ import { Navbar } from "@/components/Navbar";
 import { HeroSection } from "@/components/HeroSection";
 import { EventCarousel } from "@/components/EventCarousel";
 import { AboutSection } from "@/components/AboutSection";
+import { CountdownSection } from "@/components/CountdownSection";
 import { Footer } from "@/components/Footer";
 import { Helmet } from "react-helmet-async";
 
@@ -46,8 +47,9 @@ const Home = () => {
         <div className="relative z-10 min-h-screen">
           <Navbar />
 
-          <main className="relative space-y-24">
+          <main className="relative space-y-8 md:space-y-24">
             <HeroSection />
+            <CountdownSection />
             <EventCarousel />
             <AboutSection />
           </main>

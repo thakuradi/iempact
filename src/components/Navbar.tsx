@@ -55,7 +55,7 @@ export function Navbar() {
           <Link to="/">
             <div className="h-10 md:h-12 overflow-hidden w-24 rounded-[3rem]">
               <img
-                src="/pactlogo.png"
+                src="/Pact2.png"
                 alt="PACT logo"
                 className="h-full w-full object-cover brightness-110 contrast-125"
               />
@@ -134,7 +134,7 @@ export function Navbar() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -10 }}
             className="
-              lg:hidden mt-4 mx-4 rounded-3xl
+              lg:hidden mx-4 rounded-3xl
               bg-black/85 backdrop-blur-xl
               border border-white/10 shadow-2xl
             "

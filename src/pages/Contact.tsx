@@ -34,8 +34,9 @@ const Contact = () => {
           <div className="container mx-auto px-4 max-w-5xl">
 
             {/* ================= HEADER ================= */}
-            <div className="text-center mb-24">
-              <h1 className="font-samarkan text-6xl md:text-7xl text-yellow-400 mb-6 drop-shadow-lg">
+            <div className="text-center mt-24 mb-12">
+              <h1 className="font-['Rye'] text-6xl 
+              md:text-7xl text-yellow-400 mb-6 drop-shadow-lg">
                 Contact Us
               </h1>
               <p className="font-['Poppins'] text-lg text-foreground/80 max-w-2xl mx-auto">

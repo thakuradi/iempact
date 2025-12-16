@@ -14,8 +14,18 @@ export default {
     },
     extend: {
       fontFamily: {
-        bebas: ["Bebas Neue", "sans-serif"],
-        poppins: ["Poppins", "sans-serif"],
+        perandory: [
+          'Perandory-Regular',
+          'sans-serif'
+        ],
+        perandoryCondensed: [
+          'Perandory-Condensed',
+          'sans-serif'
+        ],
+        perandorySemiCondensed: [
+          'Perandory-Semi-Condensed',
+          'sans-serif'
+        ]
       },
       colors: {
         border: "hsl(var(--border))",

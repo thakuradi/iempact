@@ -42,6 +42,7 @@ export function ScheduleSection() {
           className="
             font-bebas
             text-[3rem]
+            font-['Rye']
             sm:text-[4.5rem]
             md:text-[6rem]
             tracking-[0.15em]

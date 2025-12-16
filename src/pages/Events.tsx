@@ -40,7 +40,7 @@ export default function Events() {
         <Navbar />
 
         <main className="container mx-auto px-4 pt-28 pb-32">
-          <h1 className="font-samarkan text-7xl text-center mb-24 text-yellow-300">
+          <h1 className="font-['Rye'] text-7xl text-center mt-24 mb-12 text-yellow-300">
             ALL EVENTS
           </h1>
 
