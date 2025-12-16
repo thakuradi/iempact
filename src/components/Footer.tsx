@@ -7,7 +7,7 @@ export function Footer() {
   return (
     <footer className="relative bg-[#3a0000] pt-20 pb-10 overflow-hidden border-t border-white/10">
       {/* Soft Gold Glow */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[90%] h-[380px] bg-gradient-to-b from-yellow-500/10 to-transparent blur-[90px]"></div>
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[90%] h-[380px] bg-gradient-to-b from-yellow-500/10 to-transparent blur-[90px]" />
 
       <div className="container mx-auto px-6 relative z-20">
         {/* Grid Layout */}
@@ -15,16 +15,14 @@ export function Footer() {
 
           {/* LEFT SECTION */}
           <div className="lg:col-span-4 space-y-6">
-            <div>
-              <h1 className="font-bebas text-5xl text-yellow-400 tracking-wide">
-                IEMPACT <span className="text-white">2026</span>
-              </h1>
-            </div>
+            <h1 className="font-bebas text-5xl text-yellow-400 tracking-wide">
+              IEMPACT <span className="text-white">2026</span>
+            </h1>
 
-
-            {/* Instagram */}
             <motion.a
               href="https://www.instagram.com/iempact_2k26?igsh=eXZtZHJ4cHV5Ym1l"
+              target="_blank"
+              rel="noopener noreferrer"
               whileHover={{ y: -4 }}
               className="inline-flex items-center justify-center w-12 h-12 
                          rounded-full border border-yellow-400/40 
@@ -61,29 +59,47 @@ export function Footer() {
             </ul>
           </div>
 
+          {/* 🔥 HIGHLIGHTED TECHNICAL TEAM */}
+          <motion.div
+            whileHover={{ scale: 1.02 }}
+            className="lg:col-span-2 space-y-6 
+                       rounded-xl p-5 
+                       bg-white/5 backdrop-blur-md 
+                       border border-yellow-400/30 
+                       border-l-4 border-l-yellow-400
+                       shadow-lg shadow-yellow-500/10"
+          >
+            <h4 className="font-bebas text-xl text-yellow-300 tracking-wide">
+              Technical Team
+            </h4>
+
+            <ul className="space-y-2 text-white/80 text-sm">
+              <li className="hover:text-white transition">Aditiya Thakur</li>
+              <li className="hover:text-white transition">Debangkita Saha</li>
+              <li className="hover:text-white transition">Souherdya Sarkar</li>
+              <li className="hover:text-white transition">Aranya Rath</li>
+            </ul>
+          </motion.div>
+
           {/* CONTACT + LOCATION */}
           <div className="lg:col-span-4 space-y-6">
-
             <h4 className="font-bebas text-xl text-yellow-400 tracking-wide">
               Contact & Location
             </h4>
 
-            {/* Email */}
             <div className="flex items-center gap-3 text-white/80">
               <Mail className="text-yellow-300" size={18} />
               <span>iempact@iem.edu.in</span>
             </div>
 
-            {/* Address */}
             <div className="flex items-center gap-3 text-white/80 leading-relaxed max-w-xs">
               <MapPin className="text-yellow-300" size={18} />
               <span>
-                IEM Management Building, D-1, Street No. 13, EP Block, Sector V,  
+                IEM Management Building, D-1, Street No. 13, EP Block, Sector V,
                 Bidhannagar, Kolkata, West Bengal 700091
               </span>
             </div>
 
-            {/* Map with hover zoom + soft gold border */}
             <motion.div
               whileHover={{ scale: 1.02 }}
               className="rounded-xl overflow-hidden border border-white/10 hover:border-yellow-400/40 transition-all shadow-lg shadow-black/40"
@@ -95,18 +111,17 @@ export function Footer() {
                 style={{ border: 0 }}
                 allowFullScreen
                 loading="lazy"
-              ></iframe>
+              />
             </motion.div>
           </div>
         </div>
 
         {/* Divider */}
-        <div className="h-px w-full bg-gradient-to-r from-transparent via-white/20 to-transparent my-10"></div>
+        <div className="h-px w-full bg-gradient-to-r from-transparent via-white/20 to-transparent my-10" />
 
         {/* Bottom Bar */}
         <div className="flex flex-col md:flex-row justify-between items-center text-xs text-white/50">
           <p>© 2026 IEMPACT. All rights reserved.</p>
-
           <div className="flex gap-6">
             <Link to="/privacy" className="hover:text-white">Privacy Policy</Link>
             <Link to="/terms" className="hover:text-white">Terms of Service</Link>
