@@ -136,6 +136,36 @@ const Contact = () => {
               </div>
             </section>
 
+            {/* ================= TECHNICAL TEAM ================= */}
+            <section className="mt-24">
+              <h2 className="font-['Rye'] text-3xl tracking-wide mb-10 text-yellow-300">
+                Technical Team
+              </h2>
+
+              <div className="grid gap-6 sm:grid-cols-2">
+                {[
+                  { name: "Aditiya Thakur"},
+                  { name: "Debangkita Saha"},
+                  { name: "Souherdya Sarkar"},
+                  { name: "Aranya Rath"},
+                ].map((faculty, i) => (
+                  <div
+                    key={i}
+                    className="
+                      rounded-2xl
+                      border border-yellow-400/30
+                      bg-black/40 backdrop-blur-md
+                      px-6 py-5
+                      shadow-lg
+                    "
+                  >
+                    <p className="font-['Rye'] text-lg font-semibold text-yellow-100">
+                      {faculty.name}
+                    </p>
+                  </div>
+                ))}
+              </div>
+            </section>    
           </div>
         </main>
 

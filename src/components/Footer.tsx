@@ -60,7 +60,7 @@ export function Footer() {
           </div>
 
           {/* 🔥 HIGHLIGHTED TECHNICAL TEAM */}
-          <motion.div
+          {/* <motion.div
             whileHover={{ scale: 1.02 }}
             className="lg:col-span-2 space-y-6 
                        rounded-xl p-5 
@@ -79,7 +79,7 @@ export function Footer() {
               <li className="hover:text-white transition">Souherdya Sarkar</li>
               <li className="hover:text-white transition">Aranya Rath</li>
             </ul>
-          </motion.div>
+          </motion.div> */}
 
           {/* CONTACT + LOCATION */}
           <div className="lg:col-span-4 space-y-6">
