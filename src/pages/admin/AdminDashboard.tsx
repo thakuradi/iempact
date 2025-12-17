@@ -29,6 +29,7 @@ interface Registration {
   teamMembers?: string[];
   // Mixed use field (sometimes phone, sometimes size)
   teamNumber?: string;
+  collegeName?: string;
 }
 
 interface User {
@@ -52,6 +53,7 @@ interface TableRow {
   teamMembers?: string[];
   
   teamNumber?: string; // Info field
+  collegeName?: string;
 
   transactionUid: string;
   paymentScreenshotUrl: string;
@@ -124,6 +126,7 @@ const AdminDashboard = () => {
                     teamLeader: reg.teamLeader,
                     teamMembers: reg.teamMembers,
                     teamNumber: reg.teamNumber,
+                    collegeName: reg.collegeName,
                     transactionUid: reg.transactionUid,
                     paymentScreenshotUrl: reg.paymentScreenshotUrl,
                     verified: reg.verified,
@@ -235,6 +238,7 @@ const AdminDashboard = () => {
                         <tr className="bg-card/40 text-left border-b border-border/30">
                             <th className="p-4 font-poppins font-medium text-foreground/70">Type</th>
                             <th className="p-4 font-poppins font-medium text-foreground/70">Name/Team</th>
+                            <th className="p-4 font-poppins font-medium text-foreground/70">College</th>
                             <th className="p-4 font-poppins font-medium text-foreground/70">Event</th>
                             <th className="p-4 font-poppins font-medium text-foreground/70">Contact/Info</th>
                             <th className="p-4 font-poppins font-medium text-foreground/70">Txn ID</th>
@@ -299,6 +303,7 @@ const AdminDashboard = () => {
                                             )}
                                         </div>
                                     </td>
+                                    <td className="p-4 font-medium text-foreground/80">{row.collegeName || "-"}</td>
                                     <td className="p-4">{row.eventName}</td>
                                     <td className="p-4 font-mono text-xs">
                                         {row.teamNumber ? (
