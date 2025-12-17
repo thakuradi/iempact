@@ -44,7 +44,7 @@ const EVENTS = [
   { id: "eastern-euphoria-duo-team", 
     name: "Eastern Euphoria (Group)", 
     type: "team", 
-    QrLink: "/QR_Codes/duo/euphoriaDuo.jpeg" 
+    QrLink: "/QR_Codes/group/easternEuphoriaGroup.jpeg" 
   },
   { id: "step-up-solo", 
     name: "Step Up (Solo)", 
@@ -124,7 +124,7 @@ const EVENTS = [
   { id: "8ball", 
     name: "8 Ball Pool (Solo)", 
     type: "solo", 
-    QrLink: "/QR_Codes/solo/8ball.jpeg" 
+    QrLink: "/QR_Codes/solo/8ballpoll.jpeg" 
   },
   { id: "quizzard-solo", 
     name: "Quizzard (Solo)", 

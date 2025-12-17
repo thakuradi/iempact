@@ -110,7 +110,7 @@ export function CountdownSection() {
            className="rounded-2xl"
         >
            <Link 
-             to="/register"
+             to="/auth"
              className="inline-flex items-center gap-2 
              px-8 py-3 bg-[#d4f5d6] text-[#1a0b2e] 
              font-perandory font-semibold text-lg uppercase tracking-wide 

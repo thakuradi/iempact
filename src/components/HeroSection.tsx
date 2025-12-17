@@ -114,7 +114,7 @@ export function HeroSection() {
           "
         >
           <Link
-            to="/register"
+            to="/auth"
             className="
               relative group flex items-center justify-center gap-3
               w-[145px] sm:w-[230px]
