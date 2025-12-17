@@ -141,6 +141,11 @@ const EVENTS = [
     type: "solo", 
     QrLink: "/QR_Codes/solo/panjaArena.jpeg" 
   },
+  { id: "vision-alchemy", 
+    name: "Vision Alchemy (Solo)", 
+    type: "solo", 
+    QrLink: "/QR_Codes/solo/visionAllchemySolo.jpeg" 
+  },
 ] as const;
 
 
