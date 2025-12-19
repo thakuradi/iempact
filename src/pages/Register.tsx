@@ -502,7 +502,7 @@ const Register = () => {
 
                 {/* College Name */}
                 <div className="space-y-2">
-                    <label className="text-sm font-medium pl-1">College Name</label>
+                    <label className="text-sm font-medium pl-1">College Name <span className="text-red-500">*</span></label>
                     <input
                         type="text"
                         name="collegeName"
@@ -510,6 +510,7 @@ const Register = () => {
                         onChange={handleChange}
                         placeholder="Institute/College Name"
                         className="w-full px-4 py-3 rounded-lg bg-black/40 border border-border/50 focus:border-accent outline-none"
+                        required
                     />
                     {errors.collegeName && <p className="text-red-500 text-xs pl-1">{errors.collegeName}</p>}
                 </div>
@@ -517,7 +518,7 @@ const Register = () => {
                 {/* Solo Fields */}
                 {registrationType === "solo" && (
                     <div className="space-y-2">
-                        <label className="text-sm font-medium pl-1">Full Name</label>
+                        <label className="text-sm font-medium pl-1">Full Name <span className="text-red-500">*</span></label>
                         <input
                             type="text"
                             name="fullName"
@@ -525,6 +526,7 @@ const Register = () => {
                             onChange={handleChange}
                             placeholder="Your full name"
                             className="w-full px-4 py-3 rounded-lg bg-black/40 border border-border/50 focus:border-accent outline-none"
+                            required
                         />
                          {errors.fullName && <p className="text-red-500 text-xs pl-1">{errors.fullName}</p>}
                     </div>
@@ -534,7 +536,7 @@ const Register = () => {
                 {registrationType === "team" && (
                     <div className="space-y-4">
                         <div className="space-y-2">
-                            <label className="text-sm font-medium pl-1">Team Name</label>
+                            <label className="text-sm font-medium pl-1">Team Name <span className="text-red-500">*</span></label>
                             <input
                                 type="text"
                                 name="teamName"
@@ -542,11 +544,12 @@ const Register = () => {
                                 onChange={handleChange}
                                 placeholder="Rockstars"
                                 className="w-full px-4 py-3 rounded-lg bg-black/40 border border-border/50 focus:border-accent outline-none"
+                                required
                             />
                             {errors.teamName && <p className="text-red-500 text-xs pl-1">{errors.teamName}</p>}
                         </div>
                         <div className="space-y-2">
-                            <label className="text-sm font-medium pl-1">Team Leader</label>
+                            <label className="text-sm font-medium pl-1">Team Leader <span className="text-red-500">*</span></label>
                             <input
                                 type="text"
                                 name="teamLeader"
@@ -554,6 +557,7 @@ const Register = () => {
                                 onChange={handleChange}
                                 placeholder="Leader Name"
                                 className="w-full px-4 py-3 rounded-lg bg-black/40 border border-border/50 focus:border-accent outline-none"
+                                required
                             />
                             {errors.teamLeader && <p className="text-red-500 text-xs pl-1">{errors.teamLeader}</p>}
                         </div>
