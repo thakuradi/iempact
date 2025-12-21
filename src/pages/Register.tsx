@@ -11,143 +11,175 @@ import { CheckCircle, Loader2, Plus, Trash2, Users, User } from "lucide-react";
 import { z } from "zod";
 
 const EVENTS = [
-  { id: "westwood", 
-    name: "Westwood - Western Solo Singing", 
-    type: "solo", 
-    QrLink: "/QR_Codes/solo/westwood.jpeg" 
+  {
+    id: "westwood",
+    name: "Westwood - Western Solo Singing",
+    type: "solo",
+    QrLink: "/QR_Codes/solo/westwood.jpeg",
   },
-  { id: "raagify", 
-    name: "Raagify - Eastern Solo Singing", 
-    type: "solo", 
-    QrLink: "/QR_Codes/solo/raagify.jpeg" 
+  {
+    id: "raagify",
+    name: "Raagify - Eastern Solo Singing",
+    type: "solo",
+    QrLink: "/QR_Codes/solo/raagify.jpeg",
   },
-  { id: "voxbox", 
-    name: "Voxbox - Solo Beatbox Battle", 
-    type: "solo", 
-    QrLink: "/QR_Codes/solo/voxbox.jpeg" 
+  {
+    id: "voxbox",
+    name: "Voxbox - Solo Beatbox Battle",
+    type: "solo",
+    QrLink: "/QR_Codes/solo/voxbox.jpeg",
   },
-  { id: "illusion-jam", 
-    name: "Illusion Jam - Battle of Bands", 
-    type: "team", 
-    QrLink: "/QR_Codes/group/illusionJam.jpeg" 
+  {
+    id: "illusion-jam",
+    name: "Illusion Jam - Battle of Bands",
+    type: "team",
+    QrLink: "/QR_Codes/group/illusionJam.jpeg",
   },
-  { id: "eastern-euphoria-solo", 
-    name: "Eastern Euphoria (Solo)", 
-    type: "solo", 
-    QrLink: "/QR_Codes/solo/EasterEuphoriaSolo.jpeg" 
+  {
+    id: "eastern-euphoria-solo",
+    name: "Eastern Euphoria (Solo)",
+    type: "solo",
+    QrLink: "/QR_Codes/solo/EasterEuphoriaSolo.jpeg",
   },
-  { id: "eastern-euphoria-duo-team", 
-    name: "Eastern Euphoria (Duo)", 
-    type: "duo", 
-    QrLink: "/QR_Codes/duo/euphoriaDuo.jpeg" 
+  {
+    id: "eastern-euphoria-duo-team",
+    name: "Eastern Euphoria (Duo)",
+    type: "duo",
+    QrLink: "/QR_Codes/duo/euphoriaDuo.jpeg",
   },
-  { id: "eastern-euphoria-duo-team", 
-    name: "Eastern Euphoria (Group)", 
-    type: "team", 
-    QrLink: "/QR_Codes/group/easternEuphoriaGroup.jpeg" 
+  {
+    id: "eastern-euphoria-duo-team",
+    name: "Eastern Euphoria (Group)",
+    type: "team",
+    QrLink: "/QR_Codes/group/easternEuphoriaGroup.jpeg",
   },
-  { id: "step-up-solo", 
-    name: "Step Up (Solo)", 
-    type: "solo", 
-    QrLink: "/QR_Codes/solo/StepUpSolo.jpeg" 
+  {
+    id: "step-up-solo",
+    name: "Step Up (Solo)",
+    type: "solo",
+    QrLink: "/QR_Codes/solo/StepUpSolo.jpeg",
   },
-  { id: "step-up-duo", 
-    name: "Step Up (Duo)", 
-    type: "duo", 
-    QrLink: "/QR_Codes/duo/stepUpDuo.jpeg" 
+  {
+    id: "step-up-duo",
+    name: "Step Up (Duo)",
+    type: "duo",
+    QrLink: "/QR_Codes/duo/stepUpDuo.jpeg",
   },
-  { id: "step-up-team", 
-    name: "Step Up (Team)", 
-    type: "team", 
-    QrLink: "/QR_Codes/group/stepUpGroup.jpeg" 
+  {
+    id: "step-up-team",
+    name: "Step Up (Team)",
+    type: "team",
+    QrLink: "/QR_Codes/group/stepUpGroup.jpeg",
   },
-  { id: "stepistan", 
-    name: "Stepistan (Solo Street Dance Battle)", 
-    type: "solo", 
-    QrLink: "/QR_Codes/solo/Stepistan.jpeg" 
+  {
+    id: "stepistan",
+    name: "Stepistan (Solo Street Dance Battle)",
+    type: "solo",
+    QrLink: "/QR_Codes/solo/Stepistan.jpeg",
   },
-  { id: "halla-bol", 
-    name: "Halla Bol (Team)", 
-    type: "team", 
-    QrLink: "/QR_Codes/group/HallaBol.jpeg" 
+  {
+    id: "halla-bol",
+    name: "Halla Bol (Team)",
+    type: "team",
+    QrLink: "/QR_Codes/group/HallaBol.jpeg",
   },
-  { id: "shrutirawngo", 
-    name: "Shrutirawngo (Team)", 
-    type: "team", 
-    QrLink: "/QR_Codes/group/shrutirawngo.jpeg" 
+  {
+    id: "shrutirawngo",
+    name: "Shrutirawngo (Team)",
+    type: "team",
+    QrLink: "/QR_Codes/group/shrutirawngo.jpeg",
   },
-  { id: "futsal", 
-    name: "Futsal (Team)", 
-    type: "team", 
-    QrLink: "/QR_Codes/group/futsal.jpeg" 
+  {
+    id: "futsal",
+    name: "Futsal (Team)",
+    type: "team",
+    QrLink: "/QR_Codes/group/futsal.jpeg",
   },
-  { id: "men-table-tennis-solo", 
-    name: "Men's Table Tennis (Solo)", 
-    type: "solo", 
-    QrLink: "/QR_Codes/solo/menSingleTableTennis.jpeg" 
+  // {
+  //   id: "men-table-tennis-solo",
+  //   name: "Men's Table Tennis (Solo)",
+  //   type: "solo",
+  //   QrLink: "/QR_Codes/solo/menSingleTableTennis.jpeg",
+  // },
+  // {
+  //   id: "men-table-tennis-duo",
+  //   name: "Men's Table Tennis (Duo)",
+  //   type: "duo",
+  //   QrLink: "/QR_Codes/duo/TableTennisDoubles.jpeg",
+  // },
+  // {
+  //   id: "women-table-tennis-solo",
+  //   name: "Women's Table Tennis (Solo)",
+  //   type: "solo",
+  //   QrLink: "/QR_Codes/solo/womenSingleTT.jpeg",
+  // },
+  // {
+  //   id: "women-table-tennis-duo",
+  //   name: "Women's Table Tennis (Duo)",
+  //   type: "duo",
+  //   QrLink: "/QR_Codes/duo/TableTennisDoubles.jpeg",
+  // },
+  {
+    id: "chess",
+    name: "Mind Over Moves - Chess (Solo)",
+    type: "solo",
+    QrLink: "/QR_Codes/solo/MindOverMoves(chess).jpeg",
   },
-  { id: "men-table-tennis-duo", 
-    name: "Men's Table Tennis (Duo)", 
-    type: "duo", 
-    QrLink: "/QR_Codes/duo/TableTennisDoubles.jpeg" 
+  {
+    id: "bgmi",
+    name: "BGMI - Team",
+    type: "team",
+    QrLink: "/QR_Codes/group/bgmi.jpeg",
   },
-  { id: "women-table-tennis-solo", 
-    name: "Women's Table Tennis (Solo)", 
-    type: "solo", 
-    QrLink: "/QR_Codes/solo/womenSingleTT.jpeg" 
+  {
+    id: "freefire",
+    name: "FreeFire (Team)",
+    type: "team",
+    QrLink: "/QR_Codes/group/freefire.jpeg",
   },
-  { id: "women-table-tennis-duo", 
-    name: "Women's Table Tennis (Duo)", 
-    type: "duo", 
-    QrLink: "/QR_Codes/duo/TableTennisDoubles.jpeg" 
+  {
+    id: "efootball",
+    name: "EFootball - Solo",
+    type: "solo",
+    QrLink: "/QR_Codes/solo/EFootball.jpeg",
   },
-  { id: "chess", 
-    name: "Mind Over Moves - Chess (Solo)", 
-    type: "solo", 
-    QrLink: "/QR_Codes/solo/MindOverMoves(chess).jpeg" 
+  {
+    id: "8ball",
+    name: "8 Ball Pool (Solo)",
+    type: "solo",
+    QrLink: "/QR_Codes/solo/8ballpoll.jpeg",
   },
-  { id: "bgmi", 
-    name: "BGMI - Team", 
-    type: "team", 
-    QrLink: "/QR_Codes/group/bgmi.jpeg" 
+  {
+    id: "quizzard-solo",
+    name: "Quizzard (Solo)",
+    type: "solo",
+    QrLink: "/QR_Codes/solo/QuizzardSolo.jpeg",
   },
-  { id: "freefire", 
-    name: "FreeFire (Team)", 
-    type: "team", 
-    QrLink: "/QR_Codes/group/freefire.jpeg" 
+  {
+    id: "quizzard-duo",
+    name: "Quizzard (Duo)",
+    type: "duo",
+    QrLink: "/QR_Codes/duo/quizzardDuo.jpeg",
   },
-  { id: "efootball", 
-    name: "EFootball - Solo", 
-    type: "solo", 
-    QrLink: "/QR_Codes/solo/EFootball.jpeg" 
+  {
+    id: "panja-arena",
+    name: "Panja Arena (Arm Wrestling)",
+    type: "solo",
+    QrLink: "/QR_Codes/solo/panjaArena.jpeg",
   },
-  { id: "8ball", 
-    name: "8 Ball Pool (Solo)", 
-    type: "solo", 
-    QrLink: "/QR_Codes/solo/8ballpoll.jpeg" 
+  {
+    id: "vision-alchemy",
+    name: "Vision Alchemy (Solo)",
+    type: "solo",
+    QrLink: "/QR_Codes/solo/visionAllchemySolo.jpeg",
   },
-  { id: "quizzard-solo", 
-    name: "Quizzard (Solo)", 
-    type: "solo", 
-    QrLink: "/QR_Codes/solo/QuizzardSolo.jpeg" 
-  },
-  { id: "quizzard-duo", 
-    name: "Quizzard (Duo)", 
-    type: "duo", 
-    QrLink: "/QR_Codes/duo/quizzardDuo.jpeg" 
-  },
-  { id: "panja-arena", 
-    name: "Panja Arena (Arm Wrestling)", 
-    type: "solo", 
-    QrLink: "/QR_Codes/solo/panjaArena.jpeg" 
-  },
-  { id: "vision-alchemy", 
-    name: "Vision Alchemy (Solo)", 
-    type: "solo", 
-    QrLink: "/QR_Codes/solo/visionAllchemySolo.jpeg" 
+  {
+    id: "reel-o-mania",
+    name: "Reel-o-Mania (Solo)",
+    type: "solo",
+    QrLink: "/QR_Codes/solo/Reel-o-mania.jpeg",
   },
 ] as const;
-
 
 // Shared schema parts
 const fileSchema = z
@@ -168,6 +200,7 @@ const soloSchema = z.object({
     .max(100, "Name must be less than 100 characters"),
   eventName: z.string().min(1, "Please select an event"),
   collegeName: z.string().trim().min(1, "College Name is required"),
+  contactNumber: z.string().trim().min(10, "Valid contact number is required"),
   transactionUid: z.string().trim().min(1, "Transaction ID is required"),
   paymentScreenshot: fileSchema,
 });
@@ -180,15 +213,13 @@ const teamSchema = z.object({
     .trim()
     .min(1, "Team name is required")
     .max(100, "Team name must be less than 100 characters"),
-  teamLeader: z
-    .string()
-    .trim()
-    .min(2, "Leader name is required"),
+  teamLeader: z.string().trim().min(2, "Leader name is required"),
   teamMembers: z
     .array(z.string().trim().min(1, "Member name cannot be empty"))
     .min(1, "At least one team member is required"),
   eventName: z.string().min(1, "Please select an event"),
   collegeName: z.string().trim().min(1, "College Name is required"),
+  contactNumber: z.string().trim().min(10, "Valid contact number is required"),
   transactionUid: z.string().trim().min(1, "Transaction ID is required"),
   paymentScreenshot: fileSchema,
 });
@@ -207,8 +238,10 @@ const Register = () => {
   const preselectedEvent = searchParams.get("event") || "";
 
   // Helper to get initial state based on type
-  const [registrationType, setRegistrationType] = useState<"solo" | "team">("solo");
-  
+  const [registrationType, setRegistrationType] = useState<"solo" | "team">(
+    "solo"
+  );
+
   // State for form fields
   // We keep a superset of state for UI, but validate only relevant parts
   const [formData, setFormData] = useState({
@@ -218,6 +251,7 @@ const Register = () => {
     teamMembers: [""] as string[],
     eventName: preselectedEvent,
     collegeName: "",
+    contactNumber: "",
     transactionUid: "",
     paymentScreenshot: undefined as unknown as File,
   });
@@ -227,16 +261,16 @@ const Register = () => {
   const [isSuccess, setIsSuccess] = useState(false);
 
   // Filter events based on registration type
-  const filteredEvents = EVENTS.filter(event => {
+  const filteredEvents = EVENTS.filter((event) => {
     if (registrationType === "solo") {
-       return event.type === "solo";
+      return event.type === "solo";
     } else {
-       // Using "as string" to avoid type errors since we are comparing against string literals not in the original type definition if we didn't update the EVENTS constant fully in one go (which we did, but to be safe)
-       return ["team", "duo", "duo/team"].includes(event.type);
+      // Using "as string" to avoid type errors since we are comparing against string literals not in the original type definition if we didn't update the EVENTS constant fully in one go (which we did, but to be safe)
+      return ["team", "duo", "duo/team"].includes(event.type);
     }
   });
-  
-  const selectedEventObj = EVENTS.find(e => e.name === formData.eventName);
+
+  const selectedEventObj = EVENTS.find((e) => e.name === formData.eventName);
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
@@ -256,15 +290,15 @@ const Register = () => {
     const updatedMembers = [...formData.teamMembers];
     updatedMembers[index] = value;
     setFormData((prev) => ({ ...prev, teamMembers: updatedMembers }));
-    
-    // Clear error for specific member index if simple error string logic is used, 
+
+    // Clear error for specific member index if simple error string logic is used,
     // or just clear the general 'teamMembers' error
     if (errors.teamMembers) {
-       setErrors((prev) => {
+      setErrors((prev) => {
         const newErrors = { ...prev };
         delete newErrors.teamMembers;
         return newErrors;
-       })
+      });
     }
   };
 
@@ -282,12 +316,15 @@ const Register = () => {
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files[0]) {
-      setFormData((prev) => ({ ...prev, paymentScreenshot: e.target.files![0] }));
+      setFormData((prev) => ({
+        ...prev,
+        paymentScreenshot: e.target.files![0],
+      }));
       if (errors.paymentScreenshot) {
-         setErrors((prev) => {
-            const newErrors = { ...prev };
-            delete newErrors.paymentScreenshot;
-            return newErrors;
+        setErrors((prev) => {
+          const newErrors = { ...prev };
+          delete newErrors.paymentScreenshot;
+          return newErrors;
         });
       }
     }
@@ -303,6 +340,7 @@ const Register = () => {
       registrationType,
       eventName: formData.eventName,
       collegeName: formData.collegeName,
+      contactNumber: formData.contactNumber,
       transactionUid: formData.transactionUid,
       paymentScreenshot: formData.paymentScreenshot,
     };
@@ -332,7 +370,7 @@ const Register = () => {
         fieldErrors[path] = err.message;
       });
       setErrors(fieldErrors);
-      
+
       const firstError = Object.values(fieldErrors)[0];
       toast.error("Form Validation Failed", {
         description: firstError || "Please check all fields.",
@@ -351,6 +389,7 @@ const Register = () => {
       submitData.append("registrationType", registrationType);
       submitData.append("eventName", formData.eventName);
       submitData.append("collegeName", formData.collegeName);
+      submitData.append("contactNumber", formData.contactNumber);
       submitData.append("transactionUid", formData.transactionUid);
       submitData.append("paymentScreenshot", formData.paymentScreenshot);
 
@@ -363,7 +402,7 @@ const Register = () => {
       }
 
       console.log("Submitting:", Object.fromEntries(submitData.entries()));
-      
+
       const response = await axios.post(
         `${import.meta.env.VITE_LOCAL_BACKENDURL}/registration`,
         submitData,
@@ -396,27 +435,29 @@ const Register = () => {
       <div className="min-h-screen bg-background text-foreground flex flex-col">
         <Navbar />
         <main className="flex-grow flex items-center justify-center p-4 pt-20">
-            <motion.div
-              initial={{ scale: 0.8, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              className="text-center p-8 max-w-md w-full bg-card/30 backdrop-blur-sm rounded-2xl border border-border/30"
-            >
-              <div className="w-20 h-20 rounded-full bg-green-500/20 flex items-center justify-center mx-auto mb-6">
-                <CheckCircle className="w-10 h-10 text-green-500" />
-              </div>
-              <h1 className="font-perandory text-4xl mb-2">Registration Complete!</h1>
-              <p className="text-foreground/70 mb-8 font-perandory">
-                Your {registrationType} registration has been received.
-              </p>
-              <div className="flex gap-4 justify-center">
-                 <Button variant="hero" onClick={() => navigate("/events")}>
-                  More Events
-                </Button>
-                <Button variant="outline" onClick={() => setIsSuccess(false)}>
-                  Register Another
-                </Button>
-              </div>
-            </motion.div>
+          <motion.div
+            initial={{ scale: 0.8, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            className="text-center p-8 max-w-md w-full bg-card/30 backdrop-blur-sm rounded-2xl border border-border/30"
+          >
+            <div className="w-20 h-20 rounded-full bg-green-500/20 flex items-center justify-center mx-auto mb-6">
+              <CheckCircle className="w-10 h-10 text-green-500" />
+            </div>
+            <h1 className="font-perandory text-4xl mb-2">
+              Registration Complete!
+            </h1>
+            <p className="text-foreground/70 mb-8 font-perandory">
+              Your {registrationType} registration has been received.
+            </p>
+            <div className="flex gap-4 justify-center">
+              <Button variant="hero" onClick={() => navigate("/events")}>
+                More Events
+              </Button>
+              <Button variant="outline" onClick={() => setIsSuccess(false)}>
+                Register Another
+              </Button>
+            </div>
+          </motion.div>
         </main>
         <Footer />
       </div>
@@ -438,7 +479,7 @@ const Register = () => {
           >
             <div className="text-center mb-10">
               <h1 className="font-['Rye'] text-5xl md:text-7xl mb-4">
-                <span className="text-gradient-accent">Register Now</span> 
+                <span className="text-gradient-accent">Register Now</span>
               </h1>
               <p className="text-foreground/70 font-perandory text-lg tracking-wide">
                 Join the largest cultural fest.
@@ -450,9 +491,9 @@ const Register = () => {
               <div className="flex p-1 bg-black/20 rounded-xl mb-8">
                 <button
                   onClick={() => {
-                      setRegistrationType("solo");
-                      // Reset event selection when switching types to avoid invalid state
-                      setFormData(prev => ({ ...prev, eventName: "" }));
+                    setRegistrationType("solo");
+                    // Reset event selection when switching types to avoid invalid state
+                    setFormData((prev) => ({ ...prev, eventName: "" }));
                   }}
                   className={`flex-1 flex items-center justify-center gap-2 py-3 rounded-lg text-sm font-medium transition-all font-perandoryCondensed tracking-wider ${
                     registrationType === "solo"
@@ -465,9 +506,9 @@ const Register = () => {
                 </button>
                 <button
                   onClick={() => {
-                      setRegistrationType("team");
-                      // Reset event selection when switching types
-                      setFormData(prev => ({ ...prev, eventName: "" }));
+                    setRegistrationType("team");
+                    // Reset event selection when switching types
+                    setFormData((prev) => ({ ...prev, eventName: "" }));
                   }}
                   className={`flex-1 flex items-center justify-center gap-2 py-3 rounded-lg text-sm font-medium transition-all font-perandoryCondensed tracking-wider ${
                     registrationType === "team"
@@ -481,167 +522,261 @@ const Register = () => {
               </div>
 
               <form onSubmit={handleSubmit} className="space-y-6">
-                
                 {/* Event Selection */}
                 <div className="space-y-2">
-                    <label className="text-sm font-medium pl-1 
-                    font-perandory tracking-wide">Event</label>
-                    <select
-                      name="eventName"
-                      value={formData.eventName}
-                      onChange={handleChange}
-                      className="w-full px-4 py-3 rounded-lg bg-black/40 border border-border/50 focus:border-accent outline-none text-white font-perandory"
-                    >
-                      <option value="" className="bg-black">Select Event...</option>
-                      {filteredEvents.map((e) => (
-                        <option key={e.id} value={e.name} className="bg-black">{e.name}</option>
-                      ))}
-                    </select>
-                    {errors.eventName && <p className="text-red-500 text-xs pl-1">{errors.eventName}</p>}
+                  <label
+                    className="text-sm font-medium pl-1 
+                    font-perandory tracking-wide"
+                  >
+                    Event
+                  </label>
+                  <select
+                    name="eventName"
+                    value={formData.eventName}
+                    onChange={handleChange}
+                    className="w-full px-4 py-3 rounded-lg bg-black/40 border border-border/50 focus:border-accent outline-none text-white font-perandory"
+                  >
+                    <option value="" className="bg-black">
+                      Select Event...
+                    </option>
+                    {filteredEvents.map((e) => (
+                      <option key={e.id} value={e.name} className="bg-black">
+                        {e.name}
+                      </option>
+                    ))}
+                  </select>
+                  {errors.eventName && (
+                    <p className="text-red-500 text-xs pl-1">
+                      {errors.eventName}
+                    </p>
+                  )}
                 </div>
 
                 {/* College Name */}
                 <div className="space-y-2">
-                    <label className="text-sm font-medium pl-1">College Name <span className="text-red-500">*</span></label>
-                    <input
-                        type="text"
-                        name="collegeName"
-                        value={formData.collegeName}
-                        onChange={handleChange}
-                        placeholder="Institute/College Name"
-                        className="w-full px-4 py-3 rounded-lg bg-black/40 border border-border/50 focus:border-accent outline-none"
-                        required
-                    />
-                    {errors.collegeName && <p className="text-red-500 text-xs pl-1">{errors.collegeName}</p>}
+                  <label className="text-sm font-medium pl-1">
+                    College Name <span className="text-red-500">*</span>
+                  </label>
+                  <input
+                    type="text"
+                    name="collegeName"
+                    value={formData.collegeName}
+                    onChange={handleChange}
+                    placeholder="Institute/College Name"
+                    className="w-full px-4 py-3 rounded-lg bg-black/40 border border-border/50 focus:border-accent outline-none"
+                    required
+                  />
+                  {errors.collegeName && (
+                    <p className="text-red-500 text-xs pl-1">
+                      {errors.collegeName}
+                    </p>
+                  )}
+                </div>
+
+                {/* Contact Number */}
+                <div className="space-y-2">
+                  <label className="text-sm font-medium pl-1">
+                    Contact Number <span className="text-red-500">*</span>
+                  </label>
+                  <input
+                    type="tel"
+                    name="contactNumber"
+                    value={formData.contactNumber}
+                    onChange={handleChange}
+                    placeholder={
+                      registrationType === "solo"
+                        ? "10-digit mobile number"
+                        : "10-digit team-lead mobile number"
+                    }
+                    className="w-full px-4 py-3 rounded-lg bg-black/40 border border-border/50 focus:border-accent outline-none"
+                    required
+                  />
+                  {errors.contactNumber && (
+                    <p className="text-red-500 text-xs pl-1">
+                      {errors.contactNumber}
+                    </p>
+                  )}
                 </div>
 
                 {/* Solo Fields */}
                 {registrationType === "solo" && (
-                    <div className="space-y-2">
-                        <label className="text-sm font-medium pl-1">Full Name <span className="text-red-500">*</span></label>
-                        <input
-                            type="text"
-                            name="fullName"
-                            value={formData.fullName}
-                            onChange={handleChange}
-                            placeholder="Your full name"
-                            className="w-full px-4 py-3 rounded-lg bg-black/40 border border-border/50 focus:border-accent outline-none"
-                            required
-                        />
-                         {errors.fullName && <p className="text-red-500 text-xs pl-1">{errors.fullName}</p>}
-                    </div>
+                  <div className="space-y-2">
+                    <label className="text-sm font-medium pl-1">
+                      Full Name <span className="text-red-500">*</span>
+                    </label>
+                    <input
+                      type="text"
+                      name="fullName"
+                      value={formData.fullName}
+                      onChange={handleChange}
+                      placeholder="Your full name"
+                      className="w-full px-4 py-3 rounded-lg bg-black/40 border border-border/50 focus:border-accent outline-none"
+                      required
+                    />
+                    {errors.fullName && (
+                      <p className="text-red-500 text-xs pl-1">
+                        {errors.fullName}
+                      </p>
+                    )}
+                  </div>
                 )}
 
                 {/* Team Fields */}
                 {registrationType === "team" && (
-                    <div className="space-y-4">
-                        <div className="space-y-2">
-                            <label className="text-sm font-medium pl-1">Team Name <span className="text-red-500">*</span></label>
-                            <input
-                                type="text"
-                                name="teamName"
-                                value={formData.teamName}
-                                onChange={handleChange}
-                                placeholder="Rockstars"
-                                className="w-full px-4 py-3 rounded-lg bg-black/40 border border-border/50 focus:border-accent outline-none"
-                                required
-                            />
-                            {errors.teamName && <p className="text-red-500 text-xs pl-1">{errors.teamName}</p>}
-                        </div>
-                        <div className="space-y-2">
-                            <label className="text-sm font-medium pl-1">Team Leader <span className="text-red-500">*</span></label>
-                            <input
-                                type="text"
-                                name="teamLeader"
-                                value={formData.teamLeader}
-                                onChange={handleChange}
-                                placeholder="Leader Name"
-                                className="w-full px-4 py-3 rounded-lg bg-black/40 border border-border/50 focus:border-accent outline-none"
-                                required
-                            />
-                            {errors.teamLeader && <p className="text-red-500 text-xs pl-1">{errors.teamLeader}</p>}
-                        </div>
-
-                        <div className="space-y-2">
-                            <div className="flex justify-between items-center">
-                                <label className="text-sm font-medium pl-1">Team Members</label>
-                                <Button type="button" size="sm" variant="ghost" onClick={addMember} className="h-6 text-xs text-accent">
-                                    <Plus className="w-3 h-3 mr-1" /> Add Member
-                                </Button>
-                            </div>
-                            <div className="space-y-2">
-                                {formData.teamMembers.map((member, index) => (
-                                    <div key={index} className="flex gap-2">
-                                        <input
-                                            type="text"
-                                            value={member}
-                                            onChange={(e) => handleMemberChange(index, e.target.value)}
-                                            placeholder={`Member ${index + 1}`}
-                                            className="flex-1 px-4 py-2 rounded-lg bg-black/40 border border-border/50 focus:border-accent outline-none text-sm"
-                                        />
-                                        {formData.teamMembers.length > 1 && (
-                                            <Button 
-                                                type="button" 
-                                                variant="ghost" 
-                                                size="icon" 
-                                                className="text-white/40 hover:text-red-500"
-                                                onClick={() => removeMember(index)}
-                                            >
-                                                <Trash2 className="w-4 h-4" />
-                                            </Button>
-                                        )}
-                                    </div>
-                                ))}
-                            </div>
-                            {errors.teamMembers && <p className="text-red-500 text-xs pl-1">{errors.teamMembers}</p>}
-                            {/* Check individual member errors from Zod path teamMembers.0 etc */}
-                        </div>
+                  <div className="space-y-4">
+                    <div className="space-y-2">
+                      <label className="text-sm font-medium pl-1">
+                        Team Name <span className="text-red-500">*</span>
+                      </label>
+                      <input
+                        type="text"
+                        name="teamName"
+                        value={formData.teamName}
+                        onChange={handleChange}
+                        placeholder="Rockstars"
+                        className="w-full px-4 py-3 rounded-lg bg-black/40 border border-border/50 focus:border-accent outline-none"
+                        required
+                      />
+                      {errors.teamName && (
+                        <p className="text-red-500 text-xs pl-1">
+                          {errors.teamName}
+                        </p>
+                      )}
                     </div>
+                    <div className="space-y-2">
+                      <label className="text-sm font-medium pl-1">
+                        Team Leader <span className="text-red-500">*</span>
+                      </label>
+                      <input
+                        type="text"
+                        name="teamLeader"
+                        value={formData.teamLeader}
+                        onChange={handleChange}
+                        placeholder="Leader Name"
+                        className="w-full px-4 py-3 rounded-lg bg-black/40 border border-border/50 focus:border-accent outline-none"
+                        required
+                      />
+                      {errors.teamLeader && (
+                        <p className="text-red-500 text-xs pl-1">
+                          {errors.teamLeader}
+                        </p>
+                      )}
+                    </div>
+
+                    <div className="space-y-2">
+                      <div className="flex justify-between items-center">
+                        <label className="text-sm font-medium pl-1">
+                          Team Members
+                        </label>
+                        <Button
+                          type="button"
+                          size="sm"
+                          variant="ghost"
+                          onClick={addMember}
+                          className="h-6 text-xs text-accent"
+                        >
+                          <Plus className="w-3 h-3 mr-1" /> Add Member
+                        </Button>
+                      </div>
+                      <div className="space-y-2">
+                        {formData.teamMembers.map((member, index) => (
+                          <div key={index} className="flex gap-2">
+                            <input
+                              type="text"
+                              value={member}
+                              onChange={(e) =>
+                                handleMemberChange(index, e.target.value)
+                              }
+                              placeholder={`Member ${index + 1}`}
+                              className="flex-1 px-4 py-2 rounded-lg bg-black/40 border border-border/50 focus:border-accent outline-none text-sm"
+                            />
+                            {formData.teamMembers.length > 1 && (
+                              <Button
+                                type="button"
+                                variant="ghost"
+                                size="icon"
+                                className="text-white/40 hover:text-red-500"
+                                onClick={() => removeMember(index)}
+                              >
+                                <Trash2 className="w-4 h-4" />
+                              </Button>
+                            )}
+                          </div>
+                        ))}
+                      </div>
+                      {errors.teamMembers && (
+                        <p className="text-red-500 text-xs pl-1">
+                          {errors.teamMembers}
+                        </p>
+                      )}
+                      {/* Check individual member errors from Zod path teamMembers.0 etc */}
+                    </div>
+                  </div>
                 )}
 
                 {/* Payment Fields (Common) */}
                 <div className="pt-4 border-t border-white/10 space-y-4">
-                     {selectedEventObj?.QrLink && (
-                        <div className="mb-6 flex flex-col items-center 
-                        animate-in fade-in zoom-in duration-300">
-                            <p className="text-sm text-center mb-3 
-                            font-perandory text-white/70 tracking-wide uppercase">
-                                Scan QR Code to Pay
-                            </p>
-                            <div className="p-3 bg-white/10 rounded-xl 
-                            border border-white/20 overflow-hidden backdrop-blur-md shadow-2xl">
-                               <img 
-                                 src={selectedEventObj.QrLink} 
-                                 alt="Payment QR Code" 
-                                 className="w-48 h-48 sm:w-56 sm:h-56 
-                                 object-cover transform scale-[1.32] rounded-lg bg-white" 
-                               />
-                            </div>
-                        </div>
-                     )}
-                     <h3 className="font-bebas text-lg opacity-80">Payment Details</h3>
-                     <div className="space-y-2">
-                        <label className="text-sm font-medium pl-1">Transaction ID</label>
-                        <input
-                            type="text"
-                            name="transactionUid"
-                            value={formData.transactionUid}
-                            onChange={handleChange}
-                            placeholder="UPI/Bank Transaction ID"
-                            className="w-full px-4 py-3 rounded-lg bg-black/40 border border-border/50 focus:border-accent outline-none"
+                  {selectedEventObj?.QrLink && (
+                    <div
+                      className="mb-6 flex flex-col items-center 
+                        animate-in fade-in zoom-in duration-300"
+                    >
+                      <p
+                        className="text-sm text-center mb-3 
+                            font-perandory text-white/70 tracking-wide uppercase"
+                      >
+                        Scan QR Code to Pay
+                      </p>
+                      <div
+                        className="p-3 bg-white/10 rounded-xl 
+                            border border-white/20 overflow-hidden backdrop-blur-md shadow-2xl"
+                      >
+                        <img
+                          src={selectedEventObj.QrLink}
+                          alt="Payment QR Code"
+                          className="w-48 h-48 sm:w-56 sm:h-56 
+                                 object-cover transform scale-[1.32] rounded-lg bg-white"
                         />
-                         {errors.transactionUid && <p className="text-red-500 text-xs pl-1">{errors.transactionUid}</p>}
+                      </div>
                     </div>
-                     <div className="space-y-2">
-                        <label className="text-sm font-medium pl-1">Screenshot</label>
-                        <input
-                            type="file"
-                            accept="image/*"
-                            onChange={handleFileChange}
-                            className="w-full px-4 py-3 rounded-lg bg-black/40 border border-border/50 focus:border-accent outline-none file:bg-accent file:text-accent-foreground file:border-0 file:rounded-md file:mr-4 file:px-2 file:text-sm"
-                        />
-                         {errors.paymentScreenshot && <p className="text-red-500 text-xs pl-1">{errors.paymentScreenshot}</p>}
-                    </div>
+                  )}
+                  <h3 className="font-bebas text-lg opacity-80">
+                    Payment Details
+                  </h3>
+                  <div className="space-y-2">
+                    <label className="text-sm font-medium pl-1">
+                      Transaction ID
+                    </label>
+                    <input
+                      type="text"
+                      name="transactionUid"
+                      value={formData.transactionUid}
+                      onChange={handleChange}
+                      placeholder="UPI/Bank Transaction ID"
+                      className="w-full px-4 py-3 rounded-lg bg-black/40 border border-border/50 focus:border-accent outline-none"
+                    />
+                    {errors.transactionUid && (
+                      <p className="text-red-500 text-xs pl-1">
+                        {errors.transactionUid}
+                      </p>
+                    )}
+                  </div>
+                  <div className="space-y-2">
+                    <label className="text-sm font-medium pl-1">
+                      Screenshot
+                    </label>
+                    <input
+                      type="file"
+                      accept="image/*"
+                      onChange={handleFileChange}
+                      className="w-full px-4 py-3 rounded-lg bg-black/40 border border-border/50 focus:border-accent outline-none file:bg-accent file:text-accent-foreground file:border-0 file:rounded-md file:mr-4 file:px-2 file:text-sm"
+                    />
+                    {errors.paymentScreenshot && (
+                      <p className="text-red-500 text-xs pl-1">
+                        {errors.paymentScreenshot}
+                      </p>
+                    )}
+                  </div>
                 </div>
 
                 <Button
@@ -651,10 +786,11 @@ const Register = () => {
                   className="w-full font-['Rye'] text-amber-900 mt-4 bg-yellow-500"
                   disabled={isSubmitting}
                 >
-                  {isSubmitting ? <Loader2 className="animate-spin mr-2" /> : null}
+                  {isSubmitting ? (
+                    <Loader2 className="animate-spin mr-2" />
+                  ) : null}
                   Submit Registration
                 </Button>
-
               </form>
             </div>
           </motion.div>
