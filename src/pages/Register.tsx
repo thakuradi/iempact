@@ -44,7 +44,7 @@ const EVENTS = [
   {
     id: "eastern-euphoria-duo-team",
     name: "Eastern Euphoria (Duo)",
-    type: "duo",
+    type: "team",
     QrLink: "/QR_Codes/duo/euphoriaDuo.jpeg",
   },
   {
@@ -178,6 +178,12 @@ const EVENTS = [
     name: "Reel-o-Mania (Solo)",
     type: "solo",
     QrLink: "/QR_Codes/solo/Reel-o-mania.jpeg",
+  },
+  {
+    id: "instrumental-echoes",
+    name: "Instrumental Echoes - Battle of instruments (Solo)",
+    type: "solo",
+    QrLink: "/QR_Codes/solo/instrumentalEchoes.jpeg",
   },
 ] as const;
 
