@@ -16,174 +16,175 @@ const EVENTS = [
     name: "Westwood - Western Solo Singing",
     type: "solo",
     QrLink: "/QR_Codes/solo/westwood.jpeg",
+    onGoing: true,
   },
   {
     id: "raagify",
     name: "Raagify - Eastern Solo Singing",
     type: "solo",
     QrLink: "/QR_Codes/solo/raagify.jpeg",
+    onGoing: true,
   },
   {
     id: "voxbox",
     name: "Voxbox - Solo Beatbox Battle",
     type: "solo",
     QrLink: "/QR_Codes/solo/voxbox.jpeg",
+    onGoing: true,
   },
   {
     id: "illusion-jam",
     name: "Illusion Jam - Battle of Bands",
     type: "team",
     QrLink: "/QR_Codes/group/illusionJam.jpeg",
+    onGoing: false,
   },
   {
     id: "eastern-euphoria-solo",
     name: "Eastern Euphoria (Solo)",
     type: "solo",
     QrLink: "/QR_Codes/solo/EasterEuphoriaSolo.jpeg",
+    onGoing: true,
   },
   {
     id: "eastern-euphoria-duo-team",
     name: "Eastern Euphoria (Duo)",
     type: "team",
     QrLink: "/QR_Codes/duo/euphoriaDuo.jpeg",
+    onGoing: true,
   },
   {
     id: "eastern-euphoria-duo-team",
     name: "Eastern Euphoria (Group)",
     type: "team",
     QrLink: "/QR_Codes/group/easternEuphoriaGroup.jpeg",
+    onGoing: true,
   },
   {
     id: "step-up-solo",
     name: "Step Up (Solo)",
     type: "solo",
     QrLink: "/QR_Codes/solo/StepUpSolo.jpeg",
+    onGoing: true,
   },
   {
     id: "step-up-duo",
     name: "Step Up (Duo)",
     type: "duo",
     QrLink: "/QR_Codes/duo/stepUpDuo.jpeg",
+    onGoing: true,
   },
   {
     id: "step-up-team",
     name: "Step Up (Team)",
     type: "team",
     QrLink: "/QR_Codes/group/stepUpGroup.jpeg",
+    onGoing: true,
   },
   {
     id: "stepistan",
     name: "Stepistan (Solo Street Dance Battle)",
     type: "solo",
     QrLink: "/QR_Codes/solo/Stepistan.jpeg",
+    onGoing: true,
   },
   {
     id: "halla-bol",
     name: "Halla Bol (Team)",
     type: "team",
     QrLink: "/QR_Codes/group/HallaBol.jpeg",
+    onGoing: true,
   },
   {
     id: "shrutirawngo",
     name: "Shrutirawngo (Team)",
     type: "team",
     QrLink: "/QR_Codes/group/shrutirawngo.jpeg",
+    onGoing: true,
   },
   {
     id: "futsal",
     name: "Futsal (Team)",
     type: "team",
     QrLink: "/QR_Codes/group/futsal.jpeg",
+    onGoing: true,
   },
-  // {
-  //   id: "men-table-tennis-solo",
-  //   name: "Men's Table Tennis (Solo)",
-  //   type: "solo",
-  //   QrLink: "/QR_Codes/solo/menSingleTableTennis.jpeg",
-  // },
-  // {
-  //   id: "men-table-tennis-duo",
-  //   name: "Men's Table Tennis (Duo)",
-  //   type: "duo",
-  //   QrLink: "/QR_Codes/duo/TableTennisDoubles.jpeg",
-  // },
-  // {
-  //   id: "women-table-tennis-solo",
-  //   name: "Women's Table Tennis (Solo)",
-  //   type: "solo",
-  //   QrLink: "/QR_Codes/solo/womenSingleTT.jpeg",
-  // },
-  // {
-  //   id: "women-table-tennis-duo",
-  //   name: "Women's Table Tennis (Duo)",
-  //   type: "duo",
-  //   QrLink: "/QR_Codes/duo/TableTennisDoubles.jpeg",
-  // },
   {
     id: "chess",
     name: "Mind Over Moves - Chess (Solo)",
     type: "solo",
     QrLink: "/QR_Codes/solo/MindOverMoves(chess).jpeg",
+    onGoing: true,
   },
   {
     id: "bgmi",
     name: "BGMI - Team",
     type: "team",
     QrLink: "/QR_Codes/group/bgmi.jpeg",
+    onGoing: true,
   },
   {
     id: "freefire",
     name: "FreeFire (Team)",
     type: "team",
     QrLink: "/QR_Codes/group/freefire.jpeg",
+    onGoing: true,
   },
   {
     id: "efootball",
     name: "EFootball - Solo",
     type: "solo",
     QrLink: "/QR_Codes/solo/EFootball.jpeg",
+    onGoing: true,
   },
   {
     id: "8ball",
     name: "8 Ball Pool (Solo)",
     type: "solo",
     QrLink: "/QR_Codes/solo/8ballpoll.jpeg",
+    onGoing: true,
   },
   {
     id: "quizzard-solo",
     name: "Quizzard (Solo)",
     type: "solo",
     QrLink: "/QR_Codes/solo/QuizzardSolo.jpeg",
+    onGoing: true,
   },
   {
     id: "quizzard-duo",
     name: "Quizzard (Duo)",
     type: "duo",
     QrLink: "/QR_Codes/duo/quizzardDuo.jpeg",
+    onGoing: true,
   },
   {
     id: "panja-arena",
     name: "Panja Arena (Arm Wrestling)",
     type: "solo",
     QrLink: "/QR_Codes/solo/panjaArena.jpeg",
+    onGoing: true,
   },
   {
     id: "vision-alchemy",
     name: "Vision Alchemy (Solo)",
     type: "solo",
     QrLink: "/QR_Codes/solo/visionAllchemySolo.jpeg",
+    onGoing: true,
   },
   {
     id: "reel-o-mania",
     name: "Reel-o-Mania (Solo)",
     type: "solo",
     QrLink: "/QR_Codes/solo/Reel-o-mania.jpeg",
+    onGoing: true,
   },
   {
     id: "instrumental-echoes",
     name: "Instrumental Echoes - Battle of instruments (Solo)",
     type: "solo",
     QrLink: "/QR_Codes/solo/instrumentalEchoes.jpeg",
+    onGoing: true,
   },
 ] as const;
 
@@ -558,245 +559,260 @@ const Register = () => {
                   )}
                 </div>
 
-                {/* College Name */}
-                <div className="space-y-2">
-                  <label className="text-sm font-medium pl-1">
-                    College Name <span className="text-red-500">*</span>
-                  </label>
-                  <input
-                    type="text"
-                    name="collegeName"
-                    value={formData.collegeName}
-                    onChange={handleChange}
-                    placeholder="Institute/College Name"
-                    className="w-full px-4 py-3 rounded-lg bg-black/40 border border-border/50 focus:border-accent outline-none"
-                    required
-                  />
-                  {errors.collegeName && (
-                    <p className="text-red-500 text-xs pl-1">
-                      {errors.collegeName}
-                    </p>
-                  )}
-                </div>
-
-                {/* Contact Number */}
-                <div className="space-y-2">
-                  <label className="text-sm font-medium pl-1">
-                    Contact Number <span className="text-red-500">*</span>
-                  </label>
-                  <input
-                    type="tel"
-                    name="contactNumber"
-                    value={formData.contactNumber}
-                    onChange={handleChange}
-                    placeholder={
-                      registrationType === "solo"
-                        ? "10-digit mobile number"
-                        : "10-digit team-lead mobile number"
-                    }
-                    className="w-full px-4 py-3 rounded-lg bg-black/40 border border-border/50 focus:border-accent outline-none"
-                    required
-                  />
-                  {errors.contactNumber && (
-                    <p className="text-red-500 text-xs pl-1">
-                      {errors.contactNumber}
-                    </p>
-                  )}
-                </div>
-
-                {/* Solo Fields */}
-                {registrationType === "solo" && (
-                  <div className="space-y-2">
-                    <label className="text-sm font-medium pl-1">
-                      Full Name <span className="text-red-500">*</span>
-                    </label>
-                    <input
-                      type="text"
-                      name="fullName"
-                      value={formData.fullName}
-                      onChange={handleChange}
-                      placeholder="Your full name"
-                      className="w-full px-4 py-3 rounded-lg bg-black/40 border border-border/50 focus:border-accent outline-none"
-                      required
-                    />
-                    {errors.fullName && (
-                      <p className="text-red-500 text-xs pl-1">
-                        {errors.fullName}
+                {selectedEventObj?.onGoing === false ? (
+                  <div className="py-8 px-4 text-center">
+                    <div className="bg-yellow-500/10 border border-yellow-500/20 rounded-2xl p-6 backdrop-blur-sm">
+                      <p className="text-yellow-200 font-perandory text-xl tracking-wide font-semibold">
+                        We’re out of slots for this particular event!
                       </p>
-                    )}
+                      <p className="mt-2 text-yellow-200/80 font-perandory text-base tracking-wide">
+                        You can still register for our other exciting events.
+                      </p>
+                    </div>
                   </div>
-                )}
-
-                {/* Team Fields */}
-                {registrationType === "team" && (
-                  <div className="space-y-4">
+                ) : (
+                  <>
+                    {/* College Name */}
                     <div className="space-y-2">
                       <label className="text-sm font-medium pl-1">
-                        Team Name <span className="text-red-500">*</span>
+                        College Name <span className="text-red-500">*</span>
                       </label>
                       <input
                         type="text"
-                        name="teamName"
-                        value={formData.teamName}
+                        name="collegeName"
+                        value={formData.collegeName}
                         onChange={handleChange}
-                        placeholder="Rockstars"
+                        placeholder="Institute/College Name"
                         className="w-full px-4 py-3 rounded-lg bg-black/40 border border-border/50 focus:border-accent outline-none"
                         required
                       />
-                      {errors.teamName && (
+                      {errors.collegeName && (
                         <p className="text-red-500 text-xs pl-1">
-                          {errors.teamName}
-                        </p>
-                      )}
-                    </div>
-                    <div className="space-y-2">
-                      <label className="text-sm font-medium pl-1">
-                        Team Leader <span className="text-red-500">*</span>
-                      </label>
-                      <input
-                        type="text"
-                        name="teamLeader"
-                        value={formData.teamLeader}
-                        onChange={handleChange}
-                        placeholder="Leader Name"
-                        className="w-full px-4 py-3 rounded-lg bg-black/40 border border-border/50 focus:border-accent outline-none"
-                        required
-                      />
-                      {errors.teamLeader && (
-                        <p className="text-red-500 text-xs pl-1">
-                          {errors.teamLeader}
+                          {errors.collegeName}
                         </p>
                       )}
                     </div>
 
+                    {/* Contact Number */}
                     <div className="space-y-2">
-                      <div className="flex justify-between items-center">
+                      <label className="text-sm font-medium pl-1">
+                        Contact Number <span className="text-red-500">*</span>
+                      </label>
+                      <input
+                        type="tel"
+                        name="contactNumber"
+                        value={formData.contactNumber}
+                        onChange={handleChange}
+                        placeholder={
+                          registrationType === "solo"
+                            ? "10-digit mobile number"
+                            : "10-digit team-lead mobile number"
+                        }
+                        className="w-full px-4 py-3 rounded-lg bg-black/40 border border-border/50 focus:border-accent outline-none"
+                        required
+                      />
+                      {errors.contactNumber && (
+                        <p className="text-red-500 text-xs pl-1">
+                          {errors.contactNumber}
+                        </p>
+                      )}
+                    </div>
+
+                    {/* Solo Fields */}
+                    {registrationType === "solo" && (
+                      <div className="space-y-2">
                         <label className="text-sm font-medium pl-1">
-                          Team Members
+                          Full Name <span className="text-red-500">*</span>
                         </label>
-                        <Button
-                          type="button"
-                          size="sm"
-                          variant="ghost"
-                          onClick={addMember}
-                          className="h-6 text-xs text-accent"
+                        <input
+                          type="text"
+                          name="fullName"
+                          value={formData.fullName}
+                          onChange={handleChange}
+                          placeholder="Your full name"
+                          className="w-full px-4 py-3 rounded-lg bg-black/40 border border-border/50 focus:border-accent outline-none"
+                          required
+                        />
+                        {errors.fullName && (
+                          <p className="text-red-500 text-xs pl-1">
+                            {errors.fullName}
+                          </p>
+                        )}
+                      </div>
+                    )}
+
+                    {/* Team Fields */}
+                    {registrationType === "team" && (
+                      <div className="space-y-4">
+                        <div className="space-y-2">
+                          <label className="text-sm font-medium pl-1">
+                            Team Name <span className="text-red-500">*</span>
+                          </label>
+                          <input
+                            type="text"
+                            name="teamName"
+                            value={formData.teamName}
+                            onChange={handleChange}
+                            placeholder="Rockstars"
+                            className="w-full px-4 py-3 rounded-lg bg-black/40 border border-border/50 focus:border-accent outline-none"
+                            required
+                          />
+                          {errors.teamName && (
+                            <p className="text-red-500 text-xs pl-1">
+                              {errors.teamName}
+                            </p>
+                          )}
+                        </div>
+                        <div className="space-y-2">
+                          <label className="text-sm font-medium pl-1">
+                            Team Leader <span className="text-red-500">*</span>
+                          </label>
+                          <input
+                            type="text"
+                            name="teamLeader"
+                            value={formData.teamLeader}
+                            onChange={handleChange}
+                            placeholder="Leader Name"
+                            className="w-full px-4 py-3 rounded-lg bg-black/40 border border-border/50 focus:border-accent outline-none"
+                            required
+                          />
+                          {errors.teamLeader && (
+                            <p className="text-red-500 text-xs pl-1">
+                              {errors.teamLeader}
+                            </p>
+                          )}
+                        </div>
+
+                        <div className="space-y-2">
+                          <div className="flex justify-between items-center">
+                            <label className="text-sm font-medium pl-1">
+                              Team Members
+                            </label>
+                            <Button
+                              type="button"
+                              size="sm"
+                              variant="ghost"
+                              onClick={addMember}
+                              className="h-6 text-xs text-accent"
+                            >
+                              <Plus className="w-3 h-3 mr-1" /> Add Member
+                            </Button>
+                          </div>
+                          <div className="space-y-2">
+                            {formData.teamMembers.map((member, index) => (
+                              <div key={index} className="flex gap-2">
+                                <input
+                                  type="text"
+                                  value={member}
+                                  onChange={(e) =>
+                                    handleMemberChange(index, e.target.value)
+                                  }
+                                  placeholder={`Member ${index + 1}`}
+                                  className="flex-1 px-4 py-2 rounded-lg bg-black/40 border border-border/50 focus:border-accent outline-none text-sm"
+                                />
+                                {formData.teamMembers.length > 1 && (
+                                  <Button
+                                    type="button"
+                                    variant="ghost"
+                                    size="icon"
+                                    className="text-white/40 hover:text-red-500"
+                                    onClick={() => removeMember(index)}
+                                  >
+                                    <Trash2 className="w-4 h-4" />
+                                  </Button>
+                                )}
+                              </div>
+                            ))}
+                          </div>
+                          {errors.teamMembers && (
+                            <p className="text-red-500 text-xs pl-1">
+                              {errors.teamMembers}
+                            </p>
+                          )}
+                          {/* Check individual member errors from Zod path teamMembers.0 etc */}
+                        </div>
+                      </div>
+                    )}
+
+                    {/* Payment Fields (Common) */}
+                    <div className="pt-4 border-t border-white/10 space-y-4">
+                      {selectedEventObj?.QrLink && (
+                        <div
+                          className="mb-6 flex flex-col items-center 
+                        animate-in fade-in zoom-in duration-300"
                         >
-                          <Plus className="w-3 h-3 mr-1" /> Add Member
-                        </Button>
+                          <p
+                            className="text-sm text-center mb-3 
+                            font-perandory text-white/70 tracking-wide uppercase"
+                          >
+                            Scan QR Code to Pay
+                          </p>
+                          <div
+                            className="p-3 bg-white/10 rounded-xl 
+                            border border-white/20 overflow-hidden backdrop-blur-md shadow-2xl"
+                          >
+                            <img
+                              src={selectedEventObj.QrLink}
+                              alt="Payment QR Code"
+                              className="w-48 h-48 sm:w-56 sm:h-56 
+                                 object-cover transform scale-[1.32] rounded-lg bg-white"
+                            />
+                          </div>
+                        </div>
+                      )}
+                      <h3 className="font-bebas text-lg opacity-80">
+                        Payment Details
+                      </h3>
+                      <div className="space-y-2">
+                        <label className="text-sm font-medium pl-1">
+                          Transaction ID
+                        </label>
+                        <input
+                          type="text"
+                          name="transactionUid"
+                          value={formData.transactionUid}
+                          onChange={handleChange}
+                          placeholder="UPI/Bank Transaction ID"
+                          className="w-full px-4 py-3 rounded-lg bg-black/40 border border-border/50 focus:border-accent outline-none"
+                        />
+                        {errors.transactionUid && (
+                          <p className="text-red-500 text-xs pl-1">
+                            {errors.transactionUid}
+                          </p>
+                        )}
                       </div>
                       <div className="space-y-2">
-                        {formData.teamMembers.map((member, index) => (
-                          <div key={index} className="flex gap-2">
-                            <input
-                              type="text"
-                              value={member}
-                              onChange={(e) =>
-                                handleMemberChange(index, e.target.value)
-                              }
-                              placeholder={`Member ${index + 1}`}
-                              className="flex-1 px-4 py-2 rounded-lg bg-black/40 border border-border/50 focus:border-accent outline-none text-sm"
-                            />
-                            {formData.teamMembers.length > 1 && (
-                              <Button
-                                type="button"
-                                variant="ghost"
-                                size="icon"
-                                className="text-white/40 hover:text-red-500"
-                                onClick={() => removeMember(index)}
-                              >
-                                <Trash2 className="w-4 h-4" />
-                              </Button>
-                            )}
-                          </div>
-                        ))}
-                      </div>
-                      {errors.teamMembers && (
-                        <p className="text-red-500 text-xs pl-1">
-                          {errors.teamMembers}
-                        </p>
-                      )}
-                      {/* Check individual member errors from Zod path teamMembers.0 etc */}
-                    </div>
-                  </div>
-                )}
-
-                {/* Payment Fields (Common) */}
-                <div className="pt-4 border-t border-white/10 space-y-4">
-                  {selectedEventObj?.QrLink && (
-                    <div
-                      className="mb-6 flex flex-col items-center 
-                        animate-in fade-in zoom-in duration-300"
-                    >
-                      <p
-                        className="text-sm text-center mb-3 
-                            font-perandory text-white/70 tracking-wide uppercase"
-                      >
-                        Scan QR Code to Pay
-                      </p>
-                      <div
-                        className="p-3 bg-white/10 rounded-xl 
-                            border border-white/20 overflow-hidden backdrop-blur-md shadow-2xl"
-                      >
-                        <img
-                          src={selectedEventObj.QrLink}
-                          alt="Payment QR Code"
-                          className="w-48 h-48 sm:w-56 sm:h-56 
-                                 object-cover transform scale-[1.32] rounded-lg bg-white"
+                        <label className="text-sm font-medium pl-1">
+                          Screenshot
+                        </label>
+                        <input
+                          type="file"
+                          accept="image/*"
+                          onChange={handleFileChange}
+                          className="w-full px-4 py-3 rounded-lg bg-black/40 border border-border/50 focus:border-accent outline-none file:bg-accent file:text-accent-foreground file:border-0 file:rounded-md file:mr-4 file:px-2 file:text-sm"
                         />
+                        {errors.paymentScreenshot && (
+                          <p className="text-red-500 text-xs pl-1">
+                            {errors.paymentScreenshot}
+                          </p>
+                        )}
                       </div>
                     </div>
-                  )}
-                  <h3 className="font-bebas text-lg opacity-80">
-                    Payment Details
-                  </h3>
-                  <div className="space-y-2">
-                    <label className="text-sm font-medium pl-1">
-                      Transaction ID
-                    </label>
-                    <input
-                      type="text"
-                      name="transactionUid"
-                      value={formData.transactionUid}
-                      onChange={handleChange}
-                      placeholder="UPI/Bank Transaction ID"
-                      className="w-full px-4 py-3 rounded-lg bg-black/40 border border-border/50 focus:border-accent outline-none"
-                    />
-                    {errors.transactionUid && (
-                      <p className="text-red-500 text-xs pl-1">
-                        {errors.transactionUid}
-                      </p>
-                    )}
-                  </div>
-                  <div className="space-y-2">
-                    <label className="text-sm font-medium pl-1">
-                      Screenshot
-                    </label>
-                    <input
-                      type="file"
-                      accept="image/*"
-                      onChange={handleFileChange}
-                      className="w-full px-4 py-3 rounded-lg bg-black/40 border border-border/50 focus:border-accent outline-none file:bg-accent file:text-accent-foreground file:border-0 file:rounded-md file:mr-4 file:px-2 file:text-sm"
-                    />
-                    {errors.paymentScreenshot && (
-                      <p className="text-red-500 text-xs pl-1">
-                        {errors.paymentScreenshot}
-                      </p>
-                    )}
-                  </div>
-                </div>
 
-                <Button
-                  type="submit"
-                  variant="hero"
-                  size="xl"
-                  className="w-full font-['Rye'] text-amber-900 mt-4 bg-yellow-500"
-                  disabled={isSubmitting}
-                >
-                  {isSubmitting ? (
-                    <Loader2 className="animate-spin mr-2" />
-                  ) : null}
-                  Submit Registration
-                </Button>
+                    <Button
+                      type="submit"
+                      variant="hero"
+                      size="xl"
+                      className="w-full font-['Rye'] text-amber-900 mt-4 bg-yellow-500"
+                      disabled={isSubmitting}
+                    >
+                      {isSubmitting ? (
+                        <Loader2 className="animate-spin mr-2" />
+                      ) : null}
+                      Submit Registration
+                    </Button>
+                  </>
+                )}
               </form>
             </div>
           </motion.div>
