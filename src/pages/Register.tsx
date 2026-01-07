@@ -16,14 +16,14 @@ const EVENTS = [
     name: "Westwood - Western Solo Singing",
     type: "solo",
     QrLink: "/QR_Codes/solo/westwood.jpeg",
-    onGoing: true,
+    onGoing: false,
   },
   {
     id: "raagify",
     name: "Raagify - Eastern Solo Singing",
     type: "solo",
     QrLink: "/QR_Codes/solo/raagify.jpeg",
-    onGoing: true,
+    onGoing: false,
   },
   {
     id: "voxbox",
@@ -44,7 +44,7 @@ const EVENTS = [
     name: "Eastern Euphoria (Solo)",
     type: "solo",
     QrLink: "/QR_Codes/solo/EasterEuphoriaSolo.jpeg",
-    onGoing: true,
+    onGoing: false,
   },
   {
     id: "eastern-euphoria-duo-team",
